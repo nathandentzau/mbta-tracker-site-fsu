@@ -14,11 +14,22 @@ abstract class Controller
 
     public abstract function main();
 
+    /**
+    * What PHP defines as a "Magic Method." This method returns a value of the $this->models array.
+    *
+    * @link http://php.net/manual/en/language.oop5.overloading.php#object.get
+    */
     public function __get($model): Model
     {
         return $this->models[$model];
     }
 
+    /**
+    * This method registers all the models needed for our Controller to be able to process data. That's
+    * right, keep your data processing out of these damn controllers.
+    *
+    * @param array $models We're defining models like so: name => namespace\class. Pretty simple.
+    */
     public function register(array $models)
     {
         foreach ($models as $name => $class)
@@ -32,8 +43,14 @@ abstract class Controller
         }
     }
 
-    private function request($request_name): string
+    /**
+    * This method returns a merged array of post and get. I thought of this one before bed one night.
+    *
+    * @param string $request This string is the key passed through the global arrays of _GET and _POST.
+    * @return string Yeah, we're just returning the value of the associative array key that's called.
+    */
+    private function request(string $request): string
     {
-        return @array_merge($_POST, $_GET)[$request_name];
+        return @array_merge($_POST, $_GET)[$request];
     }
 }

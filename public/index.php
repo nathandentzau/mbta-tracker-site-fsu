@@ -8,8 +8,14 @@
 * @license https://opensource.org/licenses/MIT MIT License
 */
 
+/* Root Directory Constant */
 const ROOT_DIR = "../";
 
+/**
+* Register given function as __autoload() implementation
+*
+* @link http://php.net/manual/en/function.spl-autoload-register.php
+*/
 spl_autoload_register(function($class) {
     $class_location = ROOT_DIR . str_replace("\\", "/", $class) . ".php";
 
@@ -18,6 +24,7 @@ spl_autoload_register(function($class) {
     }
 });
 
+/* Initiate the Application class and then run it */
 $app = new system\Application();
 $app->run();
 
