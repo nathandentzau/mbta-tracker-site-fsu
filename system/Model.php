@@ -22,6 +22,6 @@ abstract class Model
 	*/
 	public function __construct()
 	{
-		$this->db = new \PDO("sqlite:/home/nathan/www/sandbox/test.db");
+		$this->db = new \PDO("sqlite:" . ROOT_DIR . "test.db");
 	}
 }
