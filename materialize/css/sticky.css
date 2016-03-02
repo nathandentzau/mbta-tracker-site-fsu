@@ -1,0 +1,15 @@
+/* This is for the sticky footer*/
+ 
+
+  .center-button-text {
+  	margin-top: inherit;
+  	margin-bottom: inherit;
+  	}
+  .button-text-size{
+  	font-size: 1.2rem !important;
+  }
+  .button-icon{
+  	margin-right: 10px;
+  	
+  }
+ /* This is end for the sticky footer*/
