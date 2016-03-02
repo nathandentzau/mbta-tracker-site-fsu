@@ -1,6 +1,12 @@
 /* This is for the sticky footer*/
- 
-
+  .stupid-padding{
+    padding-bottom: 0 !important;
+  }
+  .border-lines{
+    border-style: solid;
+    border-right: 1px !important;
+    border-color: black !important;
+  }
   .center-button-text {
   	margin-top: inherit;
   	margin-bottom: inherit;
