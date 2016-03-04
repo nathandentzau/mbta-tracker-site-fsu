@@ -20,7 +20,7 @@ class Application
     * @link http://php.net/manual/en/reserved.variables.server.php
     * @return string
     */
-    public function getRequestUri(): string
+    private function getRequestUri(): string
     {
         return $_SERVER["REQUEST_URI"];
     }
@@ -33,7 +33,7 @@ class Application
     * @param string|array $result Either an array or string returned from the controller
     * @link http://php.net/json_encode
     */
-    public function output($result)
+    private function output($result)
     {
         echo (is_array($result)) ? json_encode($result) : $result;
     }
@@ -46,12 +46,7 @@ class Application
     */
     public function registerCallBack(string $route, Closure $callback)
     {
-        if (array_key_exists($route, $this->routes))
-        {
-            trigger_error(sprintf("Route '%s' is already registered", $route), E_USER_ERROR);
-        }
-
-        $this->routes[$route] = ["controller" => null, "method" => $callback];
+        $this->register($route, null, $callback);
     }
 
     /**
@@ -59,18 +54,23 @@ class Application
     * we will call the main method by default. Kinda like Java, I like it that way.
     *
     * @param string $route The route uri being selected
-    * @param string $controller The name of the controller, no need to specify it's namespace
-    * @param string $method The method in the controller to be called. The main method is default!
+    * @param mixed $controller The name of the controller, no need to specify it's namespace
+    * @param mixed $method The method in the controller to be called. The main method is default!
     */
-    public function register(string $route, string $controller, string $method = "main")
+    public function register(string $route, $controller, $method = "main")
     {
         if (array_key_exists($route, $this->routes))
         {
             trigger_error(sprintf("Route '%s' is already registered", $route), E_USER_ERROR);
         }
 
-        $controllerClass = "application\\Controllers\\" . $controller;
-        $this->routes[$route] = ["controller" => new $controllerClass, "method" => $method];
+        if ($controller !== null)
+        {
+            $className = "application\\Controllers\\" . $controller;
+            $controller = new $className;
+        }
+
+        $this->routes[$route] = ["controller" => $controller, "method" => $method];
     }
 
     /**
