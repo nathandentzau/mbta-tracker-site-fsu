@@ -15,16 +15,13 @@ curl_setopt_array($ch,  array(
 $result = curl_exec($ch);
 $result = json_decode($result);
 // var_dump($result);
-// var_dump($result->direction[1]);
-// var_dump($inbound);
-// var_dump($result);
 
-//Loop through data find all outbound trains and print out what stops they arrive it
+//Loop through data find all outbound trains and print out what stops they arrive
 foreach ($result->direction[0]->trip as $trip) {
-	// echo "this is the ", $trip->trip_id, "trip ", " and the train id is ", $trip->vehicle->vehicle_id , "\n";
+	echo "this is the ", $trip->trip_id, "trip ", " and the train id is ", $trip->vehicle->vehicle_id , "\n";
 	foreach ($trip->stop as $stop) {
 		// if ($stop->stop_id == "Providence"){
-			echo $trip->vehicle->vehicle_id, " will arrive at stop ", $stop->stop_id ," at ", date($date_format,$stop->sch_arr_dt) , "\n";
+			echo $trip->vehicle->vehicle_id, " will arrive at stop ", $stop->stop_name ," at ", date($date_format,$stop->sch_arr_dt) , "\n";
 		// }
 	}
 	// var_dump($trip);
