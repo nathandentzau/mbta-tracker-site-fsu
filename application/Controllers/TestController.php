@@ -25,5 +25,10 @@ class TestController extends Controller
 	public function test($poop): array
 	{
 		return array_merge(["message" => $poop], ["days" => $this->test->getAllDays()]);
+	} 
+
+	public function viewTest(): string
+	{
+		return $this->view->output("testPage.html");
 	}
 }

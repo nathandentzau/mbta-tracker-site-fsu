@@ -12,6 +12,8 @@ $app->register("/", "TestController");
 
 $app->register("/controller", "TestController", "test");
 
+$app->register("/view", "TestController", "viewTest");
+
 $app->registerCallBack("/callback", function($poop) {
     echo $poop;
 });
