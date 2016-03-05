@@ -15,17 +15,6 @@ class Application
     private $routes = [];
 
     /**
-    * Get the current URI from _SERVER global
-    *
-    * @link http://php.net/manual/en/reserved.variables.server.php
-    * @return string
-    */
-    public function getRequestUri(): string
-    {
-        return $_SERVER["REQUEST_URI"];
-    }
-
-    /**
     * Output the return of the controllers. If the return is an array it will be
     * converted to JSON and if it's a string, well we really don't care that much
     * so just echo it.
@@ -33,7 +22,7 @@ class Application
     * @param string|array $result Either an array or string returned from the controller
     * @link http://php.net/json_encode
     */
-    public function output($result)
+    private function output($result)
     {
         echo (is_array($result)) ? json_encode($result) : $result;
     }
@@ -46,12 +35,7 @@ class Application
     */
     public function registerCallBack(string $route, Closure $callback)
     {
-        if (array_key_exists($route, $this->routes))
-        {
-            trigger_error(sprintf("Route '%s' is already registered", $route), E_USER_ERROR);
-        }
-
-        $this->routes[$route] = ["controller" => null, "method" => $callback];
+        $this->register($route, null, $callback);
     }
 
     /**
@@ -59,18 +43,34 @@ class Application
     * we will call the main method by default. Kinda like Java, I like it that way.
     *
     * @param string $route The route uri being selected
-    * @param string $controller The name of the controller, no need to specify it's namespace
-    * @param string $method The method in the controller to be called. The main method is default!
+    * @param mixed $controller The name of the controller, no need to specify it's namespace
+    * @param mixed $method The method in the controller to be called. The main method is default!
     */
-    public function register(string $route, string $controller, string $method = "main")
+    public function register(string $route, $controller, $method = "main")
     {
         if (array_key_exists($route, $this->routes))
         {
             trigger_error(sprintf("Route '%s' is already registered", $route), E_USER_ERROR);
         }
 
-        $controllerClass = "application\\Controllers\\" . $controller;
-        $this->routes[$route] = ["controller" => new $controllerClass, "method" => $method];
+        if ($controller !== null)
+        {
+            $className = "application\\Controllers\\" . $controller;
+            $controller = new $className;
+        }
+
+        $this->routes[$route] = ["controller" => $controller, "method" => $method];
+    }
+
+    /**
+    * Request method that returns the requested key of either a _GET or _POST variable 
+    * 
+    * @param string $key This is the key of the associative array being called
+    * @return string returns the value of the requested key. Array out of bounds exceptions ignored
+    */
+    private function request(string $key)
+    {
+        return @array_merge($_GET, $_POST)[$key];
     }
 
     /**
@@ -86,14 +86,12 @@ class Application
         $app = &$this;
         require ROOT_DIR . "application/routes.php";
 
-        if (!array_key_exists($this->getRequestUri(), $this->routes))
+        if (array_key_exists($this->request("route"), $this->routes))
         {
-            trigger_error("The page does not exist", E_USER_ERROR);
+            $route = $this->routes[$this->request("route")];
+            $callable = ($route["controller"] !== null) ? [$route["controller"], $route["method"]] : $route["method"];
+
+            $this->output(call_user_func($callable));
         }
-
-        $route = $this->routes[$this->getRequestUri()];
-        $callable = ($route["controller"] !== null) ? [$route["controller"], $route["method"]] : $route["method"];
-
-        $this->output(call_user_func_array($callable, ["I am passed by Application->run()"]));
     }
 }

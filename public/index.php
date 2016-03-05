@@ -8,8 +8,8 @@
 * @license https://opensource.org/licenses/MIT MIT License
 */
 
-/* Root Directory Constant */
-const ROOT_DIR = "../";
+/* Include System Configuration */
+require "../config.php";
 
 /**
 * Register given function as __autoload() implementation
