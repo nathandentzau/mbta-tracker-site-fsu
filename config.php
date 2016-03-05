@@ -9,6 +9,8 @@
 * @license https://opensource.org/licenses/MIT MIT License
 */
 
+define("DEBUG", true);
+
 /* Directory Location Settings */
 define("ROOT_DIR", "../");
 define("APPLICATION_DIR", ROOT_DIR . "applications/");

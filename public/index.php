@@ -25,7 +25,14 @@ spl_autoload_register(function($class) {
 });
 
 /* Initiate the Application class and then run it */
-$app = new system\Application();
-$app->run();
+//$app = new system\Application();
+//$app->run();
+
+$data = file_get_contents(CACHE_DIR . "Routes");
+$routes = unserialize($data);
+
+echo "<pre>";
+echo print_r($routes, true);
+echo "</pre>";
 
 ?>

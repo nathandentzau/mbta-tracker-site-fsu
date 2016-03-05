@@ -14,8 +14,6 @@ require SYSTEM_DIR . "FileHandler.php";
 require SYSTEM_DIR . "MBTA.php";
 
 $mbta = new system\MBTA;
-
-echo $mbta->getServerTime() . "\n";
-
+$mbta->cacheRoutes();
 
 ?>

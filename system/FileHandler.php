@@ -46,6 +46,23 @@ class FileHandler
 		}
 	}
 
+	public function delete(string $name)
+	{
+		if (is_dir($this->directory . $name))
+		{
+			rmdir($this->directory . $name);
+		}
+		else
+		{
+			unlink($this->directory . $name);
+		}
+	}
+
+	public function getDirectory(): string
+	{
+		return $this->directory;
+	}
+
 	public function getFileContents(): string
 	{
 		return fread($this->pointer, $this->getFileSize());
@@ -58,7 +75,7 @@ class FileHandler
 
 	public function mkdir(string $name, $change = true)
 	{
-		mkdir($this->directory . $name);
+		mkdir($this->directory . $name, 0777, true);
 
 		if ($change)
 		{
