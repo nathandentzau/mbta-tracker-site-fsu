@@ -15,17 +15,6 @@ class Application
     private $routes = [];
 
     /**
-    * Get the current URI from _SERVER global
-    *
-    * @link http://php.net/manual/en/reserved.variables.server.php
-    * @return string
-    */
-    private function getRequestUri(): string
-    {
-        return $_SERVER["REQUEST_URI"];
-    }
-
-    /**
     * Output the return of the controllers. If the return is an array it will be
     * converted to JSON and if it's a string, well we really don't care that much
     * so just echo it.
@@ -74,6 +63,17 @@ class Application
     }
 
     /**
+    * Request method that returns the requested key of either a _GET or _POST variable 
+    * 
+    * @param string $key This is the key of the associative array being called
+    * @return string returns the value of the requested key. Array out of bounds exceptions ignored
+    */
+    private function request(string $key)
+    {
+        return @array_merge($_GET, $_POST)[$key];
+    }
+
+    /**
     * This method is called in public/index.php to run the entire application. This little guy
     * is a pretty important piece of our puzzel. First we're including the defined routes within 
     * application directory. Then we're initiating the route and the outputing the result of the
@@ -86,14 +86,12 @@ class Application
         $app = &$this;
         require ROOT_DIR . "application/routes.php";
 
-        if (!array_key_exists($this->getRequestUri(), $this->routes))
+        if (array_key_exists($this->request("route"), $this->routes))
         {
-            trigger_error("The page does not exist", E_USER_ERROR);
+            $route = $this->routes[$this->request("route")];
+            $callable = ($route["controller"] !== null) ? [$route["controller"], $route["method"]] : $route["method"];
+
+            $this->output(call_user_func($callable));
         }
-
-        $route = $this->routes[$this->getRequestUri()];
-        $callable = ($route["controller"] !== null) ? [$route["controller"], $route["method"]] : $route["method"];
-
-        $this->output(call_user_func_array($callable, ["I am passed by Application->run()"]));
     }
 }
