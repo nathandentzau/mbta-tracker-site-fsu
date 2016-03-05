@@ -1,5 +1,5 @@
 <?php  
-//Set Time Zone to New York because MBTA is in this Time Zone :)
+//Set Time Zone to New York because MBTA is in this Time Zone :))
 date_default_timezone_set("America/New_York");
 $date_format = "g:i a";		//format for displaying time hour:minutes am/pm
 // get the curl resource oject
