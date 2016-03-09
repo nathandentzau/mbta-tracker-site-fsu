@@ -1,12 +1,12 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>MBTA Tracker - Blue Line</title>
+      <title>MBTA Tracker - Green Line</title>
       <!--Import Google Icon Font-->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
       <!--<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/materialize-precomp.css"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,7 +22,9 @@
 <div class="navbar-fixed">
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Blue Line</a>
+      <a href="#" class="brand-logo center">
+      	<img src="images/logo.png" style="margin-top:5px;height:55px;">
+      </a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li class="active"><a href="index.html">Routes</a></li>
         <li><a href="#">About</a></li>
@@ -31,46 +33,67 @@
     </div>
   </nav>
 </div>
-<!-- Route Selector -->
-</br>
-</br>
-<div class="container">
 
-	<table>
-        <thead>
-          <tr>
-              <th data-field="in">Inbound</th>
-              <th data-field="out">Outbound</th>
-          </tr>
-        </thead>
+<!-- BANNER -->
 
-        <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-          </tr>
-        </tbody>
-      </table>
+<img src="images/greenLine.png" style="width:100%;" >
+
+
+<!-- BCDE Selector -->
+</br>
+<div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1">B</a></li>
+        <li class="tab col s3"><a href="#test2">C</a></li>
+        <li class="tab col s3"><a href="#test3">D</a></li>
+        <li class="tab col s3"><a href="#test4">E</a></li>
+      </ul>
+    </div>
+    <!-- "B" TAB -->
+    <div id="test1" class="col s12">
+    	<table width="100%" style="background:black;">
+    		<tr><td class="center white-text"><i class="fa fa-arrow-up"></i> Inbound <i class="fa fa-arrow-up"></i>
+    		<td class="center white-text"><i class="fa fa-arrow-down"></i> Outbound <i class="fa fa-arrow-down"></i></tr>
+    	</table>
+    	<table class="timetable">
+    		<tr><td>time	<td>Lechmere	<td>time
+    		<tr><td><i class="fa fa-subway fa-2x"></i>
+    						<td>Sci Park	<td>time
+    		<tr><td>time	<td>N Station	<td><i class="fa fa-subway fa-2x"></i>
+    		<tr><td>time	<td>Haymarket	<td>time
+    		<tr><td><i class="fa fa-subway fa-2x"></i>
+    						<td>Gov Cntr	<td>time
+    		<tr><td>time	<td>Park St.	<td>time
+    		<tr><td>time	<td>Boylston	<td><i class="fa fa-subway fa-2x"></i>
+    		<tr><td>time	<td>Arlington	<td>time
+		</table>
+    </div>
+    <!-- "C" TAB -->
+    <div id="test2" class="col s12">
+    	</br><h2>No, no...</h2>
+    </div>
+    <!-- "D" TAB -->
+    <div id="test3" class="col s12">
+    	</br><h2>Choo choo not home...</h2>
+    </div>
+    <!-- "E" TAB -->
+    <div id="test4" class="col s12">
+    	</br><h2>You go now</h2>
+    </div>
+  </div>
   
-</div>
+  
 <!-- Pop-up button MENU -->
   <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large grey">
       <i class="fa fa-plus-square-o"></i>
     </a>
     <ul>
-      <li><a href="#" class="btn-floating grey"><i class="fa fa-subway"></i></a></li>
-      <li><a href="#" class="btn-floating purple"><i class="fa fa-train"></i></a></li>
-      <li><a href="#" class="btn-floating yellow"><i class="fa fa-bus"></i></a></li>
-      <li><a href="#" class="btn-floating teal"><i class="fa fa-ship"></i></a></li>
+      <li><a href="#" class="btn-floating orange"><i class="fa fa-hand-o-left"></i></a></li>
+      <li><a href="#" class="btn-floating red"><i class="fa fa-exclamation"></i></a></li>
+      <li><a href="#" class="btn-floating blue"><i class="fa fa-life-ring"></i></a></li>
+      <li><a href="#" class="btn-floating green"><i class="fa fa-money"></i></a></li>
     </ul>
   </div>
       
