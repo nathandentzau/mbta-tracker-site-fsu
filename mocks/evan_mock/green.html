@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>MBTA Tracker - Green Line</title>
+      <title>mbtaNOW - Green Line</title>
       <!--Import Google Icon Font-->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,21 +23,24 @@
 <div class="navbar-fixed">
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">
+      <a href="index.html" class="brand-logo center">
       	<img src="images/logo.png" style="margin-top:5px;height:55px;">
       </a>
       <!-- This line shows the icon menu button. It was missing -Sherwyn -->
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"> <i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li class="active"><a href="index.html">Routes</a></li>
+      	<li class="active"><a href="index.html">Routes</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Support</a></li>
       </ul>
      <!--  This is the menu that shows when browser is in mobile view -Sherwyn -->
       <ul class="side-nav" id="mobile-demo">
-            <li><a href="#">About</a></li>
-            <li><a href="#">ContactUs</a></li> 
-          </ul>
+      	<li><a href="index.html">Routes</a></li>
+        <li><a href="alerts.html">Alerts</a></li>
+        <li><a href="#">Report</a></li>
+        <li><a href="#">Contact MBTA</a></li>
+        <li><a href="#">About mbtaNOW</a></li> 
+      </ul>
     </div>
   </nav>
 </div>
@@ -211,6 +214,24 @@
     </div>
 	
   </div>
+  
+<!-- LOADER -->
+ <div class="center">
+  <div class="preloader-wrapper small active">
+    <div class="spinner-layer spinner-green-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <h5 class="green-text center">Always Updating</h5>
+  <p class="green-text center">With the Latest Choo Choo Data</p>
   
   
 <!-- Pop-up button MENU -->
