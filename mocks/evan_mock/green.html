@@ -16,6 +16,7 @@
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/init-dropdown-nav.js"></script>
       <!-- ACTUAL CONTENT STARTS BELOW THIS LINE -->
       
 <!-- NAVBAR -->
@@ -25,11 +26,18 @@
       <a href="#" class="brand-logo center">
       	<img src="images/logo.png" style="margin-top:5px;height:55px;">
       </a>
+      <!-- This line shows the icon menu button. It was missing -Sherwyn -->
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li class="active"><a href="index.html">Routes</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Support</a></li>
       </ul>
+     <!--  This is the menu that shows when browser is in mobile view -Sherwyn -->
+      <ul class="side-nav" id="mobile-demo">
+            <li><a href="#">About</a></li>
+            <li><a href="#">ContactUs</a></li> 
+          </ul>
     </div>
   </nav>
 </div>
