@@ -14,6 +14,7 @@ require SYSTEM_DIR . "FileHandler.php";
 require SYSTEM_DIR . "MBTA.php";
 
 $mbta = new system\MBTA;
-$mbta->cacheRoutes();
+//$mbta->cacheRoutes();
+print_r($mbta->getTrolleyRoutes());
 
 ?>

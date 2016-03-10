@@ -14,6 +14,8 @@ class MBTA
     private $file;
     private $results = [];
 
+    const ROUTES_FILE_NAME = "Routes";
+
     public function __construct()
     {
         $this->file = new FileHandler(CACHE_DIR);
@@ -59,16 +61,6 @@ class MBTA
 */
     }
 
-    public function getSystemTime($format = false)
-    {
-        return $format ? date("m-d-Y_G:i:s") : time();
-    }
-
-    private function getLastRequest(): string
-    {
-        return $this->results[count($this->results) - 1];
-    }
-
     public function cacheRoutes()
     {
         $this->sendRequest("routes");
@@ -88,12 +80,52 @@ class MBTA
             }
         }
 
-        if (file_exists(CACHE_DIR . "Routes"))
+        if ($this->file->exists(self::ROUTES_FILE_NAME))
         {
-            $this->file->delete("Routes");
+            $this->file->delete(self::ROUTES_FILE_NAME);
         }
         
-        $this->file->createFile("Routes", serialize($routes));
+        $this->file->create(self::ROUTES_FILE_NAME, serialize($routes));
+    }
+
+    public function getSystemTime($format = false)
+    {
+        return $format ? date("m-d-Y_G:i:s") : time();
+    }
+
+    private function getLastRequest(): string
+    {
+        return $this->results[count($this->results) - 1];
+    }
+
+    public function getAllRoutes(): array
+    {
+        return unserialize($this->file->getFileContents(self::ROUTES_FILE_NAME));
+    }
+
+    public function getBusRoutes(): array
+    {
+        return $this->getAllRoutes()["Bus"];
+    }
+
+    public function getFerryRoutes(): array
+    {
+        return $this->getAllRoutes()["Boat"];
+    }
+
+    public function getHeavyRailRoutes(): array
+    {
+        return $this->getAllRoutes()["Heavy Rail"];
+    }
+
+    public function getSubwayRoutes(): array 
+    {
+        return $this->getAllRoutes()["Subway"];
+    }
+
+    public function getTrolleyRoutes(): array 
+    {
+        return $this->getAllRoutes()["Trolley"];
     }
 
     public function getServerTime(): int
@@ -103,7 +135,7 @@ class MBTA
 
         return (int) $json->server_dt;
     }
-
+/*
     public function getRoutesByStop(string $id): array
     {
         $this->sendRequest("routesbystop", ["stop" => $id]);
@@ -126,13 +158,13 @@ class MBTA
 
         return $routes;
     }
-
+*/
     private function getRouteType(string $id): string
     {
         $types = ["Trolley", "Subway", "Heavy Rail", "Bus", "Boat"];
         return $types[$id];
     }
-
+/*
     public function getStopsByRoute(string $id): array
     {
         $this->sendRequest("stopsbyroute", ["route" => $id]);
@@ -158,7 +190,7 @@ class MBTA
 
         return $stops;
     }
-
+*/
     private function parseParams(array $params): string
     {
         $output = "";

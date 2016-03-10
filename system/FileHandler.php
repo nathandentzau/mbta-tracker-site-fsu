@@ -17,10 +17,10 @@ class FileHandler
 
 	public function __construct(string $directory)
 	{
-		$this->changeDirectory($directory);
+		$this->cd($directory);
 	}
 
-	public function changeDirectory(string $directory)
+	public function cd(string $directory)
 	{
 		if (is_dir($directory))
 		{
@@ -28,21 +28,28 @@ class FileHandler
 		}
 	}
 
-	public function closeFile()
+	public function close($file)
 	{
-		fclose($this->pointer);
-		$this->pointer = null;
-		$this->file = null;
+		if ($file)
+		{
+			fclose($file);
+		}
+		else
+		{
+			fclose($this->pointer);
+			$this->pointer = null;
+			$this->file = null;
+		}
 	}
 
-	public function createFile(string $name, string $contents = "")
+	public function create(string $name, string $contents = "")
 	{
 		$this->file = $this->directory . $name;
 		$this->pointer = fopen($this->file, "x+");
 
 		if ($contents !== "")
 		{
-			$this->writeFile($contents);
+			$this->write($contents);
 		}
 	}
 
@@ -58,17 +65,33 @@ class FileHandler
 		}
 	}
 
+	public function exists(string $name): bool
+	{
+		return file_exists($this->directory . $name);
+	}
+
 	public function getDirectory(): string
 	{
 		return $this->directory;
 	}
 
-	public function getFileContents(): string
+	public function getFileContents(string $file = ""): string
 	{
-		return fread($this->pointer, $this->getFileSize());
+		if ($file)
+		{
+			$pointer = $this->open($this->directory . $file);
+			$contents = fread($pointer, filesize($this->directory . $file));
+			$this->close($pointer);
+		}
+		else
+		{
+			$contents = fread($this->pointer, $this->getFileSize());
+		}
+
+		return $contents;
 	}
 
-	public function getFileSize(): double
+	public function getFileSize(): int
 	{
 		return filesize($this->file);
 	}
@@ -83,18 +106,20 @@ class FileHandler
 		}
 	}
 
-	public function openFile(string $name, string $contents = "")
+	public function open(string $name, bool $store = false)
 	{
-		$this->file = $this->directory . $name;
-		$this->pointer = fopen($this->file, "r+");
-
-		if ($contents !== "")
+		if ($store)
 		{
-			$this->writeFile($contents);
+			$this->file = $this->directory . $name;
+			$this->pointer = fopen($this->file, "r+");
+		}
+		else
+		{
+			return fopen($this->directory . $name, "r+");
 		}
 	}
 
-	public function writeFile(string $contents)
+	public function write(string $contents)
 	{
 		fwrite($this->pointer, $contents);
 	}
