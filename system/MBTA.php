@@ -59,18 +59,6 @@ class MBTA
 */
     }
 
-    //public function cache
-
-    public function cacheRoutes()
-    {
-        if (file_exists(CACHE_DIR . "Routes"))
-        {
-            $this->file->delete("Routes");
-        }
-        
-        $this->file->createFile("Routes", serialize($this->getRoutes()));
-    }
-
     public function getSystemTime($format = false)
     {
         return $format ? date("m-d-Y_G:i:s") : time();
@@ -81,44 +69,31 @@ class MBTA
         return $this->results[count($this->results) - 1];
     }
 
-    public function getRoutes(): array
+    public function cacheRoutes()
     {
-        if (DEBUG)
-        {
-            echo "mbTANOW - Debug Information\n";
-            echo "Created by: Nathan Dentzau & Sherwyn Cooper\n\n";
-            echo "Request sent for all routes...\n";
-        }
-
         $this->sendRequest("routes");
-
-        if (DEBUG) echo "Request received from MBTA server!\n";
 
         $json = json_decode($this->getLastRequest())->mode;
 
         $routes = [];
 
-        if (DEBUG) echo "Building routes array...\n";
-
         for ($i = 0; $i < count($json); $i++)
         {
-            if (DEBUG) echo "Building array for '" . $this->getRouteType($json[$i]->route_type) . "'...\n";
-
             for ($j = 0; $j < count($json[$i]->route); $j++)
             {
-                if (DEBUG) echo "Building array for route '" . $json[$i]->route[$j]->route_name . "'... ";
-
                 $routes[$this->getRouteType($json[$i]->route_type)][] = [
                     "id"    => $json[$i]->route[$j]->route_id,
-                    "name"  => $json[$i]->route[$j]->route_name,
-                    "stops" => $this->getStopsByRoute($json[$i]->route[$j]->route_id)
-                ];
-
-                if (DEBUG) echo "\nDone!\n";
+                    "name"  => $json[$i]->route[$j]->route_name
+                ]; 
             }
         }
 
-        return $routes;
+        if (file_exists(CACHE_DIR . "Routes"))
+        {
+            $this->file->delete("Routes");
+        }
+        
+        $this->file->createFile("Routes", serialize($routes));
     }
 
     public function getServerTime(): int
