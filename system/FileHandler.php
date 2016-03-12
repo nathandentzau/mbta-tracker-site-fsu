@@ -24,7 +24,7 @@ class FileHandler
 	{
 		if (is_dir($directory))
 		{
-			$this->directory = $directory;
+			$this->directory = $directory . ((substr($directory, strlen($directory) - 1) !== "/") ? "/" : "");
 		}
 	}
 
@@ -46,6 +46,7 @@ class FileHandler
 	{
 		$this->file = $this->directory . $name;
 		$this->pointer = fopen($this->file, "x+");
+		chmod($this->file, 0777);
 
 		if ($contents !== "")
 		{
@@ -55,13 +56,23 @@ class FileHandler
 
 	public function delete(string $name)
 	{
-		if (is_dir($this->directory . $name))
+		if (is_dir($name))
 		{
-			rmdir($this->directory . $name);
+			$files = array_diff(scandir($name), array(".", ".."));
+
+			foreach ($files as $file)
+			{
+				$this->delete($name . "/" . $file);
+			}
+
+			rmdir($name);
 		}
 		else
 		{
-			unlink($this->directory . $name);
+			if (is_file($name))
+			{
+				unlink($name);
+			}
 		}
 	}
 
@@ -79,7 +90,7 @@ class FileHandler
 	{
 		if ($file)
 		{
-			$pointer = $this->open($this->directory . $file);
+			$pointer = $this->open($file);
 			$contents = fread($pointer, filesize($this->directory . $file));
 			$this->close($pointer);
 		}
@@ -99,10 +110,11 @@ class FileHandler
 	public function mkdir(string $name, $change = true)
 	{
 		mkdir($this->directory . $name, 0777, true);
+		chmod($this->directory . $name, 0777);
 
 		if ($change)
 		{
-			$this->changeDirectory($this->directory . $name . "/");
+			$this->cd($this->directory . $name);
 		}
 	}
 

@@ -28,11 +28,7 @@ spl_autoload_register(function($class) {
 //$app = new system\Application();
 //$app->run();
 
-$data = file_get_contents(CACHE_DIR . "Routes");
-$routes = unserialize($data);
-
-echo "<pre>";
-echo print_r($routes, true);
-echo "</pre>";
+$mbta = new system\MBTA();
+print_r($mbta->getRoutesByStop("place-stsate"));
 
 ?>

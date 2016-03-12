@@ -21,4 +21,4 @@ define("SYSTEM_DIR", ROOT_DIR . "system/");
 /* MBTA Developer Settings */
 define("MBTA_API_KEY", "YcqP0PC7Zk64lr1HkBq3XQ");
 define("MBTA_API_URL", "http://realtime.mbta.com/developer/api/");
-define("MBTA_API_VERSION", "v1");
+define("MBTA_API_VERSION", "v2");

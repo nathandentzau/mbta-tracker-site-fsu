@@ -9,12 +9,16 @@
 * @license https://opensource.org/licenses/MIT MIT License
 */
 
+use \stdClass;
+
 class MBTA
 {
     private $file;
     private $results = [];
 
     const ROUTES_FILE_NAME = "Routes";
+    const HUBS_DIR_NAME = "Hubs";
+    const STOPS_DIR_NAME = "Stops";
 
     public function __construct()
     {
@@ -23,42 +27,48 @@ class MBTA
 
     public function cacheAll()
     {
-        $currentTime = $this->getSystemTime(true);
+        $this->cacheRoutes();
+        $this->cacheStops();
+        $this->cacheHubs();
+    }
 
-        if (file_exists(CACHE_DIR . "LastUpdate"))
-        {
-            $this->file->delete("LastUpdate");
-        }
+    public function cacheHubs()
+    {
+        $this->file->cd(CACHE_DIR);
+        $this->file->delete(CACHE_DIR . self::HUBS_DIR_NAME);
+        $this->file->mkdir(self::HUBS_DIR_NAME);
 
-        $this->file->createFile("LastUpdate", $this->getSystemTime(true));
-        $this->file->mkdir($currentTime);
-        $this->file->createFile("Routes", serialize($this->getAllRoutes()));
+        $stations = [];
 
-        $workingDirectory = CACHE_DIR . $currentTime . "/";
-/*
         foreach ($this->getAllRoutes() as $type => $routes)
         {
-            if ($this->file->getDirectory() !== $workingDirectory)
-            {
-                $this->file->changeDirectory($workingDirectory);
-            }
-
-            $this->file->mkdir($type);
-            $typeDirectory = $workingDirectory . $type . "/";
-
             for ($i = 0; $i < count($routes); $i++)
             {
-                if ($this->file->getDirectory() !== $typeDirectory)
-                {
-                    $this->file->changeDirectory($typeDirectory);
-                }
+                $stops = $this->getStops($type, $routes[$i]["id"]);
 
-                $this->file->mkdir($routes[$i]["id"]);
-                $this->file->createFile("Stops", serialize($this->getStopsByRoute($routes[$i]["id"])));
-                //$this->file->createFile($routes[$i]["id"], $routes[$i]["name"]);
+                for ($j = 0; $j < 2; $j++)
+                {
+                    if (!isset($stops[$j]->stop))
+                    {
+                        continue;
+                    }
+
+                    for ($k = 0; $k < count($stops[$j]->stop); $k++)
+                    {
+                        if ($stops[$j]->stop[$k]->parent_station !== "" && !array_key_exists($stops[$j]->stop[$k]->parent_station, $stations))
+                        {
+                            $stations[$stops[$j]->stop[$k]->parent_station] = $stops[$j]->stop[$k]->parent_station_name;
+
+                            $this->sendRequest("routesbystop", ["stop" => $stops[$j]->stop[$k]->parent_station]);
+                            $routes = serialize(json_decode($this->getLastRequest()));
+
+                            $this->file->cd(CACHE_DIR . self::HUBS_DIR_NAME);
+                            $this->file->create($stops[$j]->stop[$k]->parent_station, $routes);
+                        }
+                    }
+                }
             }
         }
-*/
     }
 
     public function cacheRoutes()
@@ -80,26 +90,42 @@ class MBTA
             }
         }
 
+        $this->file->cd(CACHE_DIR);
+
         if ($this->file->exists(self::ROUTES_FILE_NAME))
         {
-            $this->file->delete(self::ROUTES_FILE_NAME);
+            $this->file->delete(CACHE_DIR . self::ROUTES_FILE_NAME);
         }
         
         $this->file->create(self::ROUTES_FILE_NAME, serialize($routes));
     }
 
-    public function getSystemTime($format = false)
+    public function cacheStops()
     {
-        return $format ? date("m-d-Y_G:i:s") : time();
-    }
+        $this->file->cd(CACHE_DIR);
+        $this->file->delete(CACHE_DIR . self::STOPS_DIR_NAME);
+        $this->file->mkdir(self::STOPS_DIR_NAME, false);
 
-    private function getLastRequest(): string
-    {
-        return $this->results[count($this->results) - 1];
+        foreach ($this->getAllRoutes() as $type => $routes)
+        {
+            $type = str_replace(" ", "", $type);
+            
+            $this->file->cd(CACHE_DIR . self::STOPS_DIR_NAME);
+            $this->file->mkdir($type);
+
+            for ($i = 0; $i < count($routes); $i++)
+            {
+                $this->sendRequest("stopsbyroute", ["route" => $routes[$i]["id"]]);
+                $stops = json_decode($this->getLastRequest())->direction;
+
+                $this->file->create($routes[$i]["id"], serialize($stops));
+            }
+        }
     }
 
     public function getAllRoutes(): array
     {
+        $this->file->cd(CACHE_DIR);
         return unserialize($this->file->getFileContents(self::ROUTES_FILE_NAME));
     }
 
@@ -108,9 +134,19 @@ class MBTA
         return $this->getAllRoutes()["Bus"];
     }
 
+    public function getBusStops(string $route): array
+    {
+        return $this->getStops("Bus", $route);
+    }
+
     public function getFerryRoutes(): array
     {
         return $this->getAllRoutes()["Boat"];
+    }
+
+    public function getFerryStops(string $route): array 
+    {
+        return $this->getStops("Ferry", $route);
     }
 
     public function getHeavyRailRoutes(): array
@@ -118,14 +154,40 @@ class MBTA
         return $this->getAllRoutes()["Heavy Rail"];
     }
 
+    public function getHeavyRailStops(string $route): array 
+    {
+        return $this->getStops("HeavyRail", $route);
+    }
+
+    private function getLastRequest(): string
+    {
+        return $this->results[count($this->results) - 1];
+    }
+
+    public function getRoutesByStop(string $stop): stdClass 
+    {
+        $this->file->cd(CACHE_DIR . self::HUBS_DIR_NAME);
+        return $this->file->exists($stop) ? unserialize($this->file->getFileContents($stop)) : new stdClass();
+    }
+
     public function getSubwayRoutes(): array 
     {
         return $this->getAllRoutes()["Subway"];
     }
 
+    public function getSubwayStops(string $route): array 
+    {
+        return $this->getStops("Subway", $route);
+    }
+
     public function getTrolleyRoutes(): array 
     {
         return $this->getAllRoutes()["Trolley"];
+    }
+
+    public function getTrolleyStops(string $route): array 
+    {
+        return $this->getStops("Trolley", $route);
     }
 
     public function getServerTime(): int
@@ -135,62 +197,32 @@ class MBTA
 
         return (int) $json->server_dt;
     }
-/*
-    public function getRoutesByStop(string $id): array
+
+    public function getStops(string $type, string $route): array 
     {
-        $this->sendRequest("routesbystop", ["stop" => $id]);
-        $json = json_decode($this->getLastRequest())->mode;
+        $this->file->cd(CACHE_DIR);
 
-        $routes = [];
+        $stops = [];
 
-        if (DEBUG) echo "\nFinding routes by stops for '{$id}' ";
-        for ($i = 0; $i < count($json); $i++)
+        if ($this->file->exists(self::STOPS_DIR_NAME . "/{$type}/{$route}"))
         {
-            if (DEBUG) echo ".";
-            for ($j = 0; $j < count($json[$i]->route); $j++)
-            {
-                $routes[$this->getRouteType($json[$i]->route_type)][] = [
-                    "id"    => $json[$i]->route[$j]->route_id,
-                    "name"  => $json[$i]->route[$j]->route_name,
-                ];
-            }
+            $stops = unserialize($this->file->getFileContents(self::STOPS_DIR_NAME . "/{$type}/{$route}"));
         }
 
-        return $routes;
+        return $stops;
     }
-*/
+
+    public function getSystemTime($format = false)
+    {
+        return $format ? date("m-d-Y_G:i:s") : time();
+    }
+
     private function getRouteType(string $id): string
     {
         $types = ["Trolley", "Subway", "Heavy Rail", "Bus", "Boat"];
         return $types[$id];
     }
-/*
-    public function getStopsByRoute(string $id): array
-    {
-        $this->sendRequest("stopsbyroute", ["route" => $id]);
-        $json = json_decode($this->getLastRequest())->direction;
 
-        $stops = [];
-
-        if (DEBUG) echo "\nFinding stops by route for '{$id}' ";
-        for ($i = 0; $i < count($json[0]->stop); $i++)
-        {
-            if (DEBUG) echo ".";
-
-            $stops[$json[0]->direction_name][$json[0]->stop[$i]->stop_order] = [
-                "id"            => $json[0]->stop[$i]->stop_id,
-                "name"          => $json[0]->stop[$i]->stop_name,
-                "connections"   => ($json[0]->stop[$i]->parent_station) ? $this->getRoutesByStop($json[0]->stop[$i]->parent_station) : [],
-                "location"      => [
-                    "lat"       => $json[0]->stop[$i]->stop_lat,
-                    "long"      => $json[0]->stop[$i]->stop_lon
-                ]
-            ];
-        }
-
-        return $stops;
-    }
-*/
     private function parseParams(array $params): string
     {
         $output = "";
@@ -208,15 +240,15 @@ class MBTA
 
     private function sendRequest(string $request, array $params = [])
     {
-        $ch = \curl_init();
-        \curl_setopt_array($ch, [
+        $ch = curl_init();
+        curl_setopt_array($ch, [
             CURLOPT_FRESH_CONNECT => true,
             CURLOPT_HEADER => false,
             CURLOPT_HTTPHEADER => ["content-type: application/json"],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => sprintf("%s/%s/%s?api_key=%s%s", MBTA_API_URL, MBTA_API_VERSION, $request, MBTA_API_KEY, $this->parseParams($params))
         ]);
-        $this->results[] = \curl_exec($ch);
-        \curl_close($ch);
+        $this->results[] = curl_exec($ch);
+        curl_close($ch);
     }
 }
