@@ -19,6 +19,6 @@ define("PUBLIC_DIR", ROOT_DIR . "public/");
 define("SYSTEM_DIR", ROOT_DIR . "system/");
 
 /* MBTA Developer Settings */
-define("MBTA_API_KEY", "YcqP0PC7Zk64lr1HkBq3XQ");
+define("MBTA_API_KEY", "wX9NwuHnZU2ToO7GmGR9uw");
 define("MBTA_API_URL", "http://realtime.mbta.com/developer/api/");
 define("MBTA_API_VERSION", "v2");

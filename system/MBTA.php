@@ -19,6 +19,8 @@ class MBTA
     const ROUTES_FILE_NAME = "Routes";
     const HUBS_DIR_NAME = "Hubs";
     const STOPS_DIR_NAME = "Stops";
+    const SCHEDULES_DIR_NAME = "Schedules";
+    const PREDICTIONS_DIR_NAME = "Predictions";
 
     public function __construct()
     {
@@ -100,6 +102,50 @@ class MBTA
         $this->file->create(self::ROUTES_FILE_NAME, serialize($routes));
     }
 
+    public function cacheSchedules()
+    {
+        $this->file->cd(CACHE_DIR);
+        $this->file->delete(CACHE_DIR . self::SCHEDULES_DIR_NAME);
+        $this->file->mkdir(self::SCHEDULES_DIR_NAME, false);
+
+        foreach ($this->getAllRoutes() as $type => $routes)
+        {
+            $type = str_replace(" ", "", $type);
+            
+            $this->file->cd(CACHE_DIR . self::SCHEDULES_DIR_NAME);
+            $this->file->mkdir($type);
+
+            for ($i = 0; $i < count($routes); $i++)
+            {
+                $this->sendRequest("schedulebyroute", ["route" => $routes[$i]["id"], "max_time" => 1440, "max_trips" => 100]);
+                $schedule = json_decode($this->getLastRequest())->direction;
+
+                $this->file->create($routes[$i]["id"], serialize($schedule));
+            }
+        }
+    }
+
+    public function cachePredictions()
+    {
+        $this->file->cd(CACHE_DIR);
+        $this->file->delete(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
+        $this->file->mkdir(self::PREDICTIONS_DIR_NAME);
+
+        $routes = [];
+
+        foreach ($this->getAllRoutes() as $type => $routes)
+        {
+            $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
+            $this->file->mkdir($type);
+
+            for ($i = 0; $i < count($routes); $i++)
+            {
+                $this->sendRequest("predictionsbyroute", ["route" => $routes[$i]["id"]]);
+                $this->file->create($routes[$i]["id"], serialize(json_decode($this->getLastRequest())));
+            }
+        }
+    }
+
     public function cacheStops()
     {
         $this->file->cd(CACHE_DIR);
@@ -164,10 +210,23 @@ class MBTA
         return $this->results[count($this->results) - 1];
     }
 
+    public function getPredictions(string $type, string $route): stdClass
+    {
+        $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
+        $data = unserialize($this->file->getFileContents("{$type}/{$route}"));
+        return $data ? $data : new stdClass;
+    }
+
     public function getRoutesByStop(string $stop): stdClass 
     {
         $this->file->cd(CACHE_DIR . self::HUBS_DIR_NAME);
         return $this->file->exists($stop) ? unserialize($this->file->getFileContents($stop)) : new stdClass();
+    }
+
+    public function getSchedule(string $type, string $route): array
+    {
+        $this->file->cd(CACHE_DIR . self::SCHEDULES_DIR_NAME);
+        return $this->file->exists("{$type}/{$route}") ? unserialize($this->file->getFileContents("{$type}/{$route}")) : [];
     }
 
     public function getSubwayRoutes(): array 
