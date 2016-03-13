@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="mbtaNOW">
+    <head>
+        <title>mbtaNOW</title>
+        <!--Import Google Icon Font-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize-precomp.css"  media="screen,projection"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+
+        <script type="text/javascript">
+        <!--
+            var mbtaNOW = angular.module("mbtaNOW", ["ngRoute"]);
+
+            mbtaNOW.config(function($routeProvider, $locationProvider) {
+                $routeProvider.when("/dashboard", {
+                    templateUrl: "pages/indexBody.html",
+                    controller: "mainController"
+                })
+                .otherwise({
+                    redirectTo: "/dashboard"
+                });
+            });
+
+            mbtaNOW.controller("mainController", function($scope){
+                $scope.message = "This is a test.";
+            });
+        -->
+        </script>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/init-dropdown-nav.js"></script>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="index.html" class="brand-logo center">
+                        <img src="images/logo.png" style="margin-top:5px;height:55px;">
+                    </a>
+
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"> <i class="material-icons"></i></a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li class="active"><a href="index.html">Routes</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+
+                    <ul class="side-nav" id="mobile-demo">
+                        <li><a href="index.html">Routes</a></li>
+                        <li><a href="alerts.html">Alerts</a></li>
+                        <li><a href="#">Report</a></li>
+                        <li><a href="#">Contact MBTA</a></li>
+                        <li><a href="#">About mbtaNOW</a></li> 
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <div ng-view></div>
+    </body>
+</html>
