@@ -1,0 +1,47 @@
+/**
+* mbtaNOW - Realtime MBTA Data
+*
+* @author Nathan Dentzau (Project Manager) <nathan.dentzau@gmail.com>
+* @author Sherwyn Cooper (Developer)
+* @author Evan Jensen (Designer)
+* @copyright 2016 Framingham State University
+* @license https://opensource.org/licenses/MIT MIT License
+*/
+
+.brand-logo {
+    margin-top: 3px;
+}
+
+.card-panel {
+    height: 180px;
+    padding: 40px;
+    text-align: center;
+}
+
+div[ng-view] {
+    margin-top: 30px;
+}
+
+.directions {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 20px;
+}
+
+.schedule {
+    font-size: 18px;
+    text-align: center;
+}
+
+.schedule .station {
+    background-color: green;
+    color: white;
+    font-weight: 500;
+    padding: 5px 0px;
+}
+
+.schedule .time {
+    padding: 5px 0px;
+}

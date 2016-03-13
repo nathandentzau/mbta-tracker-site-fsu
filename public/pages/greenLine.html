@@ -1,0 +1,75 @@
+<!--
+<div class="center">
+    <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="green-text center">Always Updating</h5>
+    <p class="green-text center">Our servers are gathering the latest data for your viewing pleasures</p>
+</div>-->
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s3"><a href="#test1">B</a></li>
+            <li class="tab col s3"><a href="#test2">C</a></li>
+            <li class="tab col s3"><a href="#test3">D</a></li>
+            <li class="tab col s3"><a href="#test4">E</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row directions">
+    <div class="container">
+        <div class="col l4 m4 s5">
+            <i class="fa fa-arrow-up"></i> Outbound <i class="fa fa-arrow-up"></i>
+        </div>
+
+        <div class="col l4 m4 s2">&nbsp;</div>
+
+        <div class="col l4 m4 s5">
+            <i class="fa fa-arrow-down"></i> Inbound <i class="fa fa-arrow-down"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row schedule" ng-repeat="station in schedule">
+    <div class="container">
+        <div class="col l4 m3 s3 time">
+            <div ng-if="station.outbound == -1">
+                <i class="fa fa-subway fa-2x"></i>
+            </div>
+            <div ng-if="station.outbound == 0">
+                &dash;
+            </div>
+            <div ng-if="station.outbound > 0">
+                {{ station.outbound * 1000 | date:"h:mma" }}
+            </div>
+        </div>
+
+        <div class="col l4 m6 s6 station">
+            {{ station.name }}
+        </div>
+
+        <div class="col l4 m3 s3 time">
+            <div ng-if="station.inbound == -1">
+                <i class="fa fa-subway fa-2x"></i>
+            </div>
+            <div ng-if="station.inbound == 0">
+                &dash;
+            </div>
+            <div ng-if="station.inbound > 0">
+                {{ station.inbound * 1000 | date:"h:mma" }}
+            </div>
+        </div>
+    </div>
+</div>

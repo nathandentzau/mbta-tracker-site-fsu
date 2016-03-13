@@ -29,7 +29,7 @@ spl_autoload_register(function($class) {
 //$app->run();
 
 $mbta = new system\MBTA();
-
+/*
 foreach ($mbta->getAllRoutes() as $type => $routes)
 {
 	echo "<h1>{$type}</h1>\n";
@@ -73,5 +73,52 @@ foreach ($mbta->getAllRoutes() as $type => $routes)
 		}
 	}
 }
+*/
+
+$stops = [];
+$route = $mbta->getTrolleyStops("Green-B");
+$predictions = $mbta->getPredictions("Trolley", "Green-B")->direction;
+
+for ($i = 0; $i < count($route[1]->stop); $i++)
+{
+	$name = trim(explode(" - ", $route[1]->stop[$i]->stop_name)[0]);
+	$stops[$i] = [
+		"name"		=> $name,
+		"inbound"	=> 0,
+		"outbound"	=> 0,
+	];
+
+	for ($j = 0; $j < 2; $j++)
+	{
+		for ($k = 0; $k < count($predictions[$j]->trip); $k++)
+		{
+			$direction = ($j === 0) ? "outbound" : "inbound";
+
+			for ($l = 0; $l < count($predictions[$j]->trip[$k]->stop); $l++)
+			{
+				$predictionName = trim(explode(" - ", $predictions[$j]->trip[$k]->stop[$l]->stop_name)[0]);
+
+				if ($predictionName === $name)
+				{
+					$predictionTime = $predictions[$j]->trip[$k]->stop[$l]->pre_dt;
+
+					if ($stops[$i][$direction] === 0)
+					{
+						$stops[$i][$direction] = $predictionTime;
+					} 
+					else
+					{
+						if ($stops[$i][$direction] > $predictionTime)
+						{
+							$stops[$i][$direction] = $predictionTime;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+echo json_encode($stops);
 
 ?>

@@ -4,43 +4,7 @@
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
   
- /* CUSTOM CSS BELOW */
- 
- .btn-fill {
- 	width:90%;
- 	margin:5%;
- }
- 
- .timetable {
- 
- }
- 
- .timetable td {
- 	text-align:center;
- 	}
- 	
- .timetable i {
- 	color:green;
- 	}
- 	
- .train-early {
- 	font-weight:bold;
- 	color:orange;
- 	}
- 
- .train-late {
- 	font-weight:bold;
- 	color:red;
- 	}
- 	
- .station {
-	padding:5px;
- 	background:green;
- 	border:solid black 2px;
- 	border-radius:25px;
- 	color:white;
- 	}
- 
+
  /* STOCK CSS */
  
 .materialize-red.lighten-5 {
