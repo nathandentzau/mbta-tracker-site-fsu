@@ -12,7 +12,8 @@
  }
  
  .timetable {
- 
+ margin:0px;
+ padding:0px;
  }
  
  .timetable td {
@@ -40,6 +41,19 @@
  	border-radius:25px;
  	color:white;
  	}
+ 
+ 
+ /* MBTA BRAND COLORS... (as RGB, HEX modified in STOCK CSS below)
+ 
+BLUE LINE: rgb(47, 93, 166) - #2F5DA6
+GREEN LINE: rgb(0, 129, 80) - #008150
+ORANGE LINE: rgb(253, 138, 3)
+RED LINE: rgb(250, 45, 39) - #FA2D27
+SILVER LINE: rgb(154, 156, 157)
+COMMUTER: rgb(157, 21, 130)
+
+*/
+
  
  /* STOCK CSS */
  
@@ -164,11 +178,11 @@
 }
 
 .red {
-  background-color: #F44336 !important;
+  background-color: /* #F44336 */ #FA2D27 !important;
 }
 
 .red-text {
-  color: #F44336 !important;
+  color: #FA2D27 !important;
 }
 
 .red.darken-1 {
@@ -724,11 +738,11 @@
 }
 
 .blue {
-  background-color: #2196F3 !important;
+  background-color: #2F5DA6 !important;
 }
 
 .blue-text {
-  color: #2196F3 !important;
+  color: /* #2196F3 */ #2F5DA6 !important;
 }
 
 .blue.darken-1 {
@@ -1172,11 +1186,11 @@
 }
 
 .green {
-  background-color: #4CAF50 !important;
+  background-color: /* #4CAF50 */ #008150 !important;
 }
 
 .green-text {
-  color: #4CAF50 !important;
+  color: #008150 !important;
 }
 
 .green.darken-1 {
