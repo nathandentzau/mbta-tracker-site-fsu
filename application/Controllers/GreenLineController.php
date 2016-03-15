@@ -26,21 +26,32 @@ class GreenLineController extends Controller
 
     public function b(): array
     {
-        return $this->greenLine->getBLineStops();
+        return $this->parseResults($this->greenLine->getBLineStops(), $this->greenLine->getBLinePredictions());
     }
 
     public function c(): array 
     {
-        return $this->greenLine->getCLineStops();
+        return $this->parseResults($this->greenLine->getCLineStops(), $this->greenLine->getCLinePredictions());
     }
 
     public function d(): array 
     {
-        return $this->greenLine->getDLineStops();
+        return $this->parseResults($this->greenLine->getDLineStops(), $this->greenLine->getDLinePredictions());
     }
 
     public function e(): array 
     {
-        return $this->greenLine->getELineStops();
+        return $this->parseResults($this->greenLine->getELineStops(), $this->greenLine->getELinePredictions());
+    }
+
+    private function parseResults($stops, $predictions): array 
+    {
+        for ($i = 0; $i < count($stops); $i++)
+        {
+            $stops[$i]["inbound"] = (int) @$predictions[1][$stops[$i]["name"]];
+            $stops[$i]["outbound"] = (int) @$predictions[0][$stops[$i]["name"]];
+        }
+
+        return $stops;
     }
 }

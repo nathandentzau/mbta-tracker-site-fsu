@@ -8,9 +8,9 @@ mbtaNOW.config(function($routeProvider, $locationProvider) {
         templateUrl: "pages/greenLine.html",
         controller: "greenLineController"
      })
-/*    .otherwise({
+    .otherwise({
         redirectTo: "/Dashboard"
-    });*/
+    });
 
     $locationProvider.html5Mode(true);
 });
