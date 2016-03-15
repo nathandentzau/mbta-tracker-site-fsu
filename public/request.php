@@ -25,11 +25,10 @@ spl_autoload_register(function($class) {
 });
 
 /* Initiate the Application class and then run it */
-//$app = new system\Application();
-//$app->run();
-
-$mbta = new system\MBTA();
+$app = new system\Application();
+$app->run();
 /*
+
 foreach ($mbta->getAllRoutes() as $type => $routes)
 {
 	echo "<h1>{$type}</h1>\n";
@@ -73,8 +72,9 @@ foreach ($mbta->getAllRoutes() as $type => $routes)
 		}
 	}
 }
-*/
 
+
+$mbta = new system\MBTA();
 $stops = [];
 $route = $mbta->getTrolleyStops("Green-B");
 $predictions = $mbta->getPredictions("Trolley", "Green-B")->direction;
@@ -93,6 +93,8 @@ for ($i = 0; $i < count($route[1]->stop); $i++)
 		for ($k = 0; $k < count($predictions[$j]->trip); $k++)
 		{
 			$direction = ($j === 0) ? "outbound" : "inbound";
+
+			$location = 0;
 
 			for ($l = 0; $l < count($predictions[$j]->trip[$k]->stop); $l++)
 			{
@@ -120,5 +122,5 @@ for ($i = 0; $i < count($route[1]->stop); $i++)
 }
 
 echo json_encode($stops);
-
+*/
 ?>
