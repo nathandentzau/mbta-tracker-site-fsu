@@ -19,28 +19,6 @@
  .timetable td {
  	text-align:center;
  	}
- 	
- .timetable i {
- 	color:green;
- 	}
- 	
- .train-early {
- 	font-weight:bold;
- 	color:orange;
- 	}
- 
- .train-late {
- 	font-weight:bold;
- 	color:red;
- 	}
- 	
- .station {
-	padding:5px;
- 	background:green;
- 	border:solid black 2px;
- 	border-radius:25px;
- 	color:white;
- 	}
  
  
  /* MBTA BRAND COLORS... (as RGB, HEX modified in STOCK CSS below)

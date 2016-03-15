@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>mbtaNOW - Green Line</title>
+      <title>mbtaNOW - Bus Line</title>
       <!--Import Google Icon Font-->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -46,66 +46,61 @@
 </div>
 
 <!-- BANNER -->
-<div class="greenHeader">
-	<h2>Green Line</h2>
+<div class="busHeader">
+	<h2>Bus Lines</h2>
 </div>
 
 <style>
 
 nav {
   color: #fff;
-  background-color: #008150; /*original: #ee6e73*/
+  background-color: #fdd835; /*original: #ee6e73*/
   width: 100%;
   height: 56px;
   line-height: 56px;
 }
 
-	.greenHeader {
+	.busHeader {
 		margin:-25px;
 		margin-top:-30px;
-		background:url("images/greenLine.png");
+		background:url("images/busLine.png");
 		background-size: cover; 
 		background-repeat:no-repeat;
 		}
 				
-	.greenHeader h2 {
+	.busHeader h2 {
 		padding:35px;
-		background:rgba(0, 129, 80,0.7);
+		background:rgba(253, 216, 53,0.7);
 		font-weight:200;
 		color:white;
 		}
 		
 .tabs .tab a {
-  color: #008150;
+  color: #fdd835;
   font-weight:500;
   font-size:20px;
 }
 
 .tabs .tab a:hover {
   color: #fff;
-  background-color:#008150;
-}
-
-.tabs .tab.disabled a {
-  color: #f9c9cb;
-  cursor: default;
+  background-color:#fdd835;
 }
 
 .tabs .indicator {
   position: absolute;
   bottom: 0;
   height: 4px;
-  background-color: #008150;
+  background-color: #fdd835;
   will-change: left, right;
 }
 
 .timetable i {
- 	color:#008150;
+ 	color:#fdd835;
  	}
  	
 .station {
 	padding:5px;
- 	background:#008150;
+ 	background:#fdd835;
  	border:solid black 2px;
  	border-radius:25px;
  	color:white;
@@ -114,17 +109,19 @@ nav {
 
 </style>
 
-<!-- BCDE Selector -->
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s3"><a href="#test1">B</a></li>
-        <li class="tab col s3"><a href="#test2">C</a></li>
-        <li class="tab col s3"><a href="#test3">D</a></li>
-        <li class="tab col s3"><a href="#test4">E</a></li>
-      </ul>
-    </div>
-    
-    <!-- "B" TAB -->
+<!-- LINE SELECTOR -->
+
+<div class="input-field col s12">
+    <select class="browser-default">
+      <option value="" disabled selected>Select a Line</option>
+      <option value="1">Framingham/Worcester</option>
+      <option value="2">Fitchburg</option>
+      <option value="3">Fairmount</option>
+    </select>
+    <label> </label>
+  </div>
+
+<!-- LINE 1 -->
     <div id="test1" class="col s12">
     	<table width="100%" style="background:black;">
     		<tr><td class="center white-text"><i class="fa fa-arrow-up"></i> Inbound <i class="fa fa-arrow-up"></i>
@@ -255,23 +252,6 @@ nav {
 
 
 		</table>
-    </div>
-   
-    <!-- "C" TAB -->
-    <div id="test2" class="col s12">
-    	</br><h2>No, no...</h2>
-    </div>
-    
-    <!-- "D" TAB -->
-    <div id="test3" class="col s12">
-    	</br><h2>Choo choo not home...</h2>
-    </div>
-    
-    <!-- "E" TAB -->
-    <div id="test4" class="col s12">
-    	</br><h2>You go now</h2>
-    </div>
-	
   
 <!-- LOADER -->
  <div class="center">
