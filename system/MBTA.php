@@ -185,6 +185,11 @@ class MBTA
         return $this->getStops("Bus", $route);
     }
 
+    public function getBusPredictions(string $route): array 
+    {
+        return $this->getPredictions("Bus", $route)->direction;
+    }
+
     public function getFerryRoutes(): array
     {
         return $this->getAllRoutes()["Boat"];
@@ -195,6 +200,11 @@ class MBTA
         return $this->getStops("Ferry", $route);
     }
 
+    public function getFerryPredictions(string $route): array 
+    {
+        return $this->getPredictions("Ferry", $route)->direction;
+    }
+
     public function getHeavyRailRoutes(): array
     {
         return $this->getAllRoutes()["Heavy Rail"];
@@ -203,6 +213,11 @@ class MBTA
     public function getHeavyRailStops(string $route): array 
     {
         return $this->getStops("HeavyRail", $route);
+    }
+
+    public function getHeavyRailPredictions(string $route): array 
+    {
+        return $this->getPredictions("HeavyRail", $route)->direction;
     }
 
     private function getLastRequest(): string
@@ -239,6 +254,11 @@ class MBTA
         return $this->getStops("Subway", $route);
     }
 
+    public function getSubwayPredictions(string $route): array 
+    {
+        return $this->getPredictions("Subway", $route)->direction;
+    }
+
     public function getTrolleyRoutes(): array 
     {
         return $this->getAllRoutes()["Trolley"];
@@ -247,6 +267,11 @@ class MBTA
     public function getTrolleyStops(string $route): array 
     {
         return $this->getStops("Trolley", $route);
+    }
+
+    public function getTrolleyPredictions(string $route): array 
+    {
+        return $this->getPredictions("Trolley", $route)->direction;
     }
 
     public function getServerTime(): int
