@@ -40,9 +40,8 @@ div[ng-view] {
 
 .lineHeader {
     margin-top:-30px;
-    background:url("images/greenLine.png");
-    background-size: cover; 
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 }
                     
 .lineHeader h2 {

@@ -10,40 +10,30 @@
 
 use system\Controller;
 
-class GreenLineController extends Controller 
+class RedLineController extends Controller 
 {
     public function __construct()
     {
         $this->register([
-            "greenLine"    => "application\\Models\\GreenLine"
+            "redLine"    => "application\\Models\\RedLine"
         ]);
     }
 
-    public function main(): array
+    public function main(): array 
     {
         $line = strtolower($this->request("line"));
 
         return method_exists($this, $line) ? $this->$line() : [];
     }
 
-    public function b(): array
+    public function ashmont(): array 
     {
-        return $this->parseResults($this->greenLine->getBLineStops(), $this->greenLine->getBLinePredictions());
+        return $this->parseResults($this->redLine->getAshmontLineStops(), $this->redLine->getPredictions());
     }
 
-    public function c(): array 
+    public function braintree(): array 
     {
-        return $this->parseResults($this->greenLine->getCLineStops(), $this->greenLine->getCLinePredictions());
-    }
-
-    public function d(): array 
-    {
-        return $this->parseResults($this->greenLine->getDLineStops(), $this->greenLine->getDLinePredictions());
-    }
-
-    public function e(): array 
-    {
-        return $this->parseResults($this->greenLine->getELineStops(), $this->greenLine->getELinePredictions());
+        return $this->parseResults($this->redLine->getBraintreeLineStops(), $this->redLine->getPredictions());
     }
 
     private function parseResults($stops, $predictions): array 
