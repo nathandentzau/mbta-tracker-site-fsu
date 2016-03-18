@@ -37,7 +37,7 @@
       </div>
       <p class="lead">Thank you for your interest in the latest in choo choo tracking technology.  Please be aware that during development, vehicle arrival times may not update properly and other content may change periodically with or without notice.  </p>
       </br></br>
-      <p align=center><a href="http://mbtanow.com"><button type="button" class="btn btn-primary btn-lg">Continue to App</button></a></p>
+      <p align=center><button type="button" class="btn btn-primary btn-lg" id="beta">Continue to App</button></p>
     </div>
 
     <footer class="footer">
@@ -48,7 +48,21 @@
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="beta/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+    <!--
+      window.onload = function() {
+        document.getElementById("beta").onclick = function() {
+            var tomorrow = Date.now() + (86400 * 1000);
+            var date = new Date(tomorrow).toUTCString();
+
+            document.cookie = "beta=true; expires=" + date;
+
+            window.location = "/Dashboard";
+        };
+      };
+    -->
+    </script>
   </body>
 </html>
 
