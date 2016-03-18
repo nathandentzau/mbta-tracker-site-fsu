@@ -57,21 +57,19 @@
 
 <div class="row directions">
     <div class="container">
-        <div class="col l4 m4 s5">
-            <i class="fa fa-arrow-up"></i> Outbound <i class="fa fa-arrow-up"></i>
+        <div class="col s6" style="text-align: left !important;">
+            <i class="fa fa-arrow-up"></i>&nbsp;&nbsp;Outbound
         </div>
 
-        <div class="col l4 m4 s2">&nbsp;</div>
-
-        <div class="col l4 m4 s5">
-            <i class="fa fa-arrow-down"></i> Inbound <i class="fa fa-arrow-down"></i>
+        <div class="col s6" style="text-align: right !important;">
+            Inbound&nbsp;&nbsp;<i class="fa fa-arrow-down"></i>
         </div>
     </div>
 </div>
 
 <div class="row schedule" ng-repeat="station in schedule">
     <div class="container">
-        <div class="col l4 m3 s3 time">
+        <div class="col l4 m3 s3 time" style="text-align: left;">
             <div ng-if="station.outbound == -1">
                 <i class="fa fa-subway fa-2x"></i>
             </div>
@@ -87,7 +85,7 @@
             {{ station.name }}
         </div>
 
-        <div class="col l4 m3 s3 time">
+        <div class="col l4 m3 s3 time" style="text-align: right;">
             <div ng-if="station.inbound == -1">
                 <i class="fa fa-subway fa-2x"></i>
             </div>

@@ -28,9 +28,9 @@ class FileHandler
 		}
 	}
 
-	public function close($file)
+	public function close($file = null)
 	{
-		if ($file)
+		if ($file !== null)
 		{
 			fclose($file);
 		}

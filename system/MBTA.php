@@ -128,20 +128,33 @@ class MBTA
     public function cachePredictions()
     {
         $this->file->cd(CACHE_DIR);
-        $this->file->delete(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
-        $this->file->mkdir(self::PREDICTIONS_DIR_NAME);
+        //$this->file->delete(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
+
+        if (!$this->file->exists(self::PREDICTIONS_DIR_NAME)) 
+        {
+            $this->file->mkdir(self::PREDICTIONS_DIR_NAME);
+        }
 
         $routes = [];
 
         foreach ($this->getAllRoutes() as $type => $routes)
         {
             $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
-            $this->file->mkdir($type);
+
+            if (!$this->file->exists($type))
+            {
+                $this->file->mkdir($type);
+            }
+
+            $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME . "/" . $type);
 
             for ($i = 0; $i < count($routes); $i++)
             {
                 $this->sendRequest("predictionsbyroute", ["route" => $routes[$i]["id"]]);
-                $this->file->create($routes[$i]["id"], serialize(json_decode($this->getLastRequest())));
+                $method = ($this->file->exists($routes[$i]["id"])) ? "open" : "create";
+                $this->file->$method($routes[$i]["id"], ($method === "open") ? true : "");
+                $this->file->write(serialize(json_decode($this->getLastRequest())));
+                $this->file->close();
             }
         }
     }
