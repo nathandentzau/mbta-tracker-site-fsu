@@ -3165,12 +3165,12 @@ span.badge.new {
   font-weight: 300;
   font-size: 0.8rem;
   color: #fff;
-  background-color: #26a69a;
+  background-color: #ffffff;  /* Original: #26a69a // changed to match theme */
   border-radius: 2px;
 }
 
 span.badge.new:after {
-  content: " new";
+  content: " NEW"; /* Changed to caps to match theme */
 }
 
 nav ul a span.badge {
