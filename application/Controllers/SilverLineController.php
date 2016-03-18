@@ -50,8 +50,8 @@ class SilverLineController extends Controller
     {
         for ($i = 0; $i < count($stops); $i++)
         {
-            $stops[$i]["inbound"] = (int) @$predictions[1][$stops[$i]["name"]];
-            $stops[$i]["outbound"] = (int) @$predictions[0][$stops[$i]["name"]];
+            $stops[$i]["inbound"] = (int) @$predictions[0][$stops[$i]["name"]];
+            $stops[$i]["outbound"] = (int) @$predictions[1][$stops[$i]["name"]];
         }
 
         return $stops;

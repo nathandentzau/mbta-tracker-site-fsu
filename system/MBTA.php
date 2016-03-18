@@ -200,7 +200,8 @@ class MBTA
 
     public function getBusPredictions(string $route): array 
     {
-        return $this->getPredictions("Bus", $route)->direction;
+        $predictions = $this->getPredictions("Bus", $route)->direction;
+        return ($predictions !== null) ? $predictions : [];
     }
 
     public function getFerryRoutes(): array
@@ -215,7 +216,8 @@ class MBTA
 
     public function getFerryPredictions(string $route): array 
     {
-        return $this->getPredictions("Ferry", $route)->direction;
+        $predictions = $this->getPredictions("Ferry", $route)->direction;
+        return ($predictions !== null) ? $predictions : [];
     }
 
     public function getHeavyRailRoutes(): array
@@ -230,7 +232,8 @@ class MBTA
 
     public function getHeavyRailPredictions(string $route): array 
     {
-        return $this->getPredictions("HeavyRail", $route)->direction;
+        $predictions = $this->getPredictions("HeavyRail", $route)->direction;
+        return ($predictions !== null) ? $predictions : [];
     }
 
     private function getLastRequest(): string
@@ -269,7 +272,8 @@ class MBTA
 
     public function getSubwayPredictions(string $route): array 
     {
-        return $this->getPredictions("Subway", $route)->direction;
+        $predictions = $this->getPredictions("Subway", $route)->direction;
+        return ($predictions !== null) ? $predictions : [];
     }
 
     public function getTrolleyRoutes(): array 
@@ -284,7 +288,8 @@ class MBTA
 
     public function getTrolleyPredictions(string $route): array 
     {
-        return $this->getPredictions("Trolley", $route)->direction;
+        $predictions = $this->getPredictions("Trolley", $route)->direction;
+        return ($predictions !== null) ? $predictions : [];
     }
 
     public function getServerTime(): int
