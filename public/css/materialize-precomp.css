@@ -128,11 +128,11 @@
 }
 
 .red {
-  background-color: #F44336 !important;
+  background-color: /* #F44336 */ #FA2D27 !important;
 }
 
 .red-text {
-  color: #F44336 !important;
+  color: #FA2D27 !important;
 }
 
 .red.darken-1 {
@@ -688,11 +688,11 @@
 }
 
 .blue {
-  background-color: #2196F3 !important;
+  background-color: #2F5DA6 !important;
 }
 
 .blue-text {
-  color: #2196F3 !important;
+  color: /* #2196F3 */ #2F5DA6 !important;
 }
 
 .blue.darken-1 {
@@ -1136,11 +1136,11 @@
 }
 
 .green {
-  background-color: #4CAF50 !important;
+  background-color: /* #4CAF50 */ #008150 !important;
 }
 
 .green-text {
-  color: #4CAF50 !important;
+  color: #008150 !important;
 }
 
 .green.darken-1 {
