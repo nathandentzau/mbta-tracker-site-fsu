@@ -136,9 +136,12 @@ class MBTA
         }
 
         $routes = [];
+        $silverLines = ["741", "742", "751", "749"];
 
         foreach ($this->getAllRoutes() as $type => $routes)
         {
+            if ($type === "Ferry" || $type === "Heavy Rail") continue;
+
             $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
 
             if (!$this->file->exists($type))
@@ -150,10 +153,11 @@ class MBTA
 
             for ($i = 0; $i < count($routes); $i++)
             {
+                if ($type === "Bus" && !in_array($routes[$i]["id"], $silverLines)) continue;
+
                 $this->sendRequest("predictionsbyroute", ["route" => $routes[$i]["id"]]);
-                $method = ($this->file->exists($routes[$i]["id"])) ? "open" : "create";
-                $this->file->$method($routes[$i]["id"], ($method === "open") ? true : "");
-                $this->file->write(serialize(json_decode($this->getLastRequest())));
+                $this->file->create($routes[$i]["id"]);
+                $this->file->write($this->getLastRequest());
                 $this->file->close();
             }
         }
@@ -241,11 +245,10 @@ class MBTA
         return $this->results[count($this->results) - 1];
     }
 
-    public function getPredictions(string $type, string $route): stdClass
+    public function getPredictions(string $type, string $route)
     {
         $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
-        $data = unserialize($this->file->getFileContents("{$type}/{$route}"));
-        return $data ? $data : new stdClass;
+        return json_decode($this->file->getFileContents("{$type}/{$route}"));
     }
 
     public function getRoutesByStop(string $stop): stdClass 

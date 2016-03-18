@@ -45,7 +45,7 @@ class FileHandler
 	public function create(string $name, string $contents = "")
 	{
 		$this->file = $this->directory . $name;
-		$this->pointer = fopen($this->file, "x+");
+		$this->pointer = fopen($this->file, "wa+");
 		chmod($this->file, 0777);
 
 		if ($contents !== "")

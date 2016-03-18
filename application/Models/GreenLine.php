@@ -17,7 +17,7 @@ class GreenLine extends Model
         return $this->getStops("Green-B");
     }
 
-    public function getBLinePredictions(): array 
+    public function getBLinePredictions()
     {
         return $this->getPredictions("Green-B");
     }

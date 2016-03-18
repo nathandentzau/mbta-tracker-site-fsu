@@ -19,14 +19,14 @@ class GreenLineController extends Controller
         ]);
     }
 
-    public function main(): array
+    public function main()
     {
         $line = strtolower($this->request("line"));
 
         return method_exists($this, $line) ? $this->$line() : [];
     }
 
-    public function b(): array
+    public function b()
     {
         return $this->parseResults($this->greenLine->getBLineStops(), $this->greenLine->getBLinePredictions());
     }
