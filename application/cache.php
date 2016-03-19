@@ -14,6 +14,9 @@ require SYSTEM_DIR . "FileHandler.php";
 require SYSTEM_DIR . "MBTA.php";
 
 $mbta = new system\MBTA;
-$mbta->cacheRoutes();
+echo "Shiz\n";
+var_dump($mbta->getRoutes());
+
+// $mbta->cacheRoutes();
 
 ?>
