@@ -1,12 +1,12 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>MBTA Tracker - Blue Line</title>
+      <title>mbtaNOW - Blue Line</title>
       <!--Import Google Icon Font-->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-      <!--<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/materialize-precomp.css"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,63 +16,242 @@
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/init-dropdown-nav.js"></script>
       <!-- ACTUAL CONTENT STARTS BELOW THIS LINE -->
       
 <!-- NAVBAR -->
 <div class="navbar-fixed">
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">Blue Line</a>
+      <a href="index.html" class="brand-logo center">
+      	<img src="images/logo.png" style="margin-top:5px;height:55px;">
+      </a>
+      <!-- This line shows the icon menu button. It was missing -Sherwyn -->
+      <a href="#" data-activates="mobile-demo" class="button-collapse"> <i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li class="active"><a href="index.html">Routes</a></li>
+      	<li class="active"><a href="index.html">Routes</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Support</a></li>
+      </ul>
+     <!--  This is the menu that shows when browser is in mobile view -Sherwyn -->
+      <ul class="side-nav" id="mobile-demo">
+      	<li><a href="index.html">Routes</a></li>
+        <li><a href="alerts.html">Alerts</a></li>
+        <li><a href="#">Report</a></li>
+        <li><a href="#">Contact MBTA</a></li>
+        <li><a href="#">About mbtaNOW</a></li> 
       </ul>
     </div>
   </nav>
 </div>
-<!-- Route Selector -->
-</br>
-</br>
-<div class="container">
 
-	<table>
-        <thead>
-          <tr>
-              <th data-field="in">Inbound</th>
-              <th data-field="out">Outbound</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-          </tr>
-        </tbody>
-      </table>
-  
+<!-- BANNER -->
+<div class="blueHeader">
+	<h2>Blue Line</h2>
 </div>
+
+<style>
+
+nav {
+  color: #fff;
+  background-color: #2F5DA6; /*original: #ee6e73*/
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+}
+
+	.blueHeader {
+		margin:-25px;
+		margin-top:-30px;
+		background:url("images/blueLine.png");
+		background-size: cover; 
+		background-repeat:no-repeat;
+		}
+				
+	.blueHeader h2 {
+		padding:35px;
+		background:rgba(47, 93, 166,0.7);
+		font-weight:200;
+		color:white;
+		}
+		
+.tabs .tab a {
+  color: #2F5DA6;
+  font-weight:500;
+  font-size:20px;
+}
+
+.tabs .tab a:hover {
+  color: #fff;
+  background-color:#2F5DA6;
+}
+
+.tabs .indicator {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background-color: #2F5DA6;
+  will-change: left, right;
+}
+
+.timetable i {
+ 	color:#2F5DA6;
+ 	}
+ 	
+.station {
+	padding:5px;
+ 	background:#2F5DA6;
+ 	border:solid black 2px;
+ 	border-radius:25px;
+ 	color:white;
+ 	}
+ 
+
+</style>
+
+    <div id="test1" class="col s12">
+    	<table width="100%" style="background:black;">
+    		<tr><td class="center white-text"><i class="fa fa-arrow-up"></i> Inbound <i class="fa fa-arrow-up"></i>
+    		<td>
+    		<td class="center white-text"><i class="fa fa-arrow-down"></i> Outbound <i class="fa fa-arrow-down"></i></tr>
+    	</table>
+    	<table class="timetable">
+
+    	<tr><td>time
+    		<td><div class="station">Lechmere</div>
+    		<td>time
+    		
+    	<tr><td><i class="fa fa-subway fa-2x"></i>
+    		<td><div class="station">Science Park</div>
+    		<td>time
+    		
+    	<tr><td>time
+    		<td><div class="station">North Station</div>
+    		<td><i class="fa fa-subway fa-2x"></i>
+    		
+    	<tr><td>time
+    		<td><div class="station">Haymarket</div>
+    		<td>time
+    		
+    	<tr><td>time
+    		<td><div class="station">Gov Center</div>
+    		<td>time
+    		
+    	<tr><td>time
+    		<td><div class="station">Park Streeteet</div>
+    		<td>time
+    		
+    	<tr><td>time
+    		<td><div class="station">Boylston Street</div>
+    		<td>time
+    		
+    	<tr><td><i class="fa fa-subway fa-2x"></i>
+    		<td><div class="station">Copley</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Arlington</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Hynes Conv Ctr</div>
+    		<td><i class="fa fa-subway fa-2x"></i>
+
+    	<tr><td>time
+    		<td><div class="station">Kenmore</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Blandford Street</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">BU East</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">BU Central</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">BU West</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">St. Paul Street</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Peasant Street</div>
+    		<td><i class="fa fa-subway fa-2x"></i>
+
+    	<tr><td>time
+    		<td><div class="station">Babcock Street</div>
+    		<td>time
+
+    	<tr><td><i class="fa fa-subway fa-2x"></i>
+    		<td><div class="station">Packards Corner</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Harvard Ave</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Griggs/LongAve</div>
+    		<td>time
+
+    	<tr><td><i class="fa fa-subway fa-2x"></i>
+    		<td><div class="station">Allston Street</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Warren Street</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Washington Street</div>
+    		<td><i class="fa fa-subway fa-2x"></i>
+
+    	<tr><td>time
+    		<td><div class="station">Sutherland Rd</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Chiswick Rd</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">Chestnut Hill Ave</div>
+    		<td>time
+
+    	<tr><td><i class="fa fa-subway fa-2x"></i>
+    		<td><div class="station">South Street</div>
+    		<td>time
+
+    	<tr><td>time
+    		<td><div class="station">BC Station</div>
+    		<td><i class="fa fa-subway fa-2x"></i>
+
+    	<tr><td>00:00
+    		<td><div class="station">TEMPLATE</div>
+    		<td>00:00
+
+
+		</table>
+  
 <!-- Pop-up button MENU -->
-  <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+  <!--<div class="fixed-action-btn horizontal click-to-toggle" style="top: 145; right: 24px;">
     <a class="btn-floating btn-large grey">
       <i class="fa fa-plus-square-o"></i>
     </a>
     <ul>
-      <li><a href="#" class="btn-floating grey"><i class="fa fa-subway"></i></a></li>
-      <li><a href="#" class="btn-floating purple"><i class="fa fa-train"></i></a></li>
-      <li><a href="#" class="btn-floating yellow"><i class="fa fa-bus"></i></a></li>
-      <li><a href="#" class="btn-floating teal"><i class="fa fa-ship"></i></a></li>
+      <li><a href="#" class="btn-floating orange"><i class="fa fa-hand-o-left"></i></a></li>
+      <li><a href="#" class="btn-floating red"><i class="fa fa-exclamation"></i></a></li>
+      <li><a href="#" class="btn-floating blue"><i class="fa fa-life-ring"></i></a></li>
+      <li><a href="#" class="btn-floating green"><i class="fa fa-money"></i></a></li>
     </ul>
-  </div>
+  </div>-->
       
       
     </body>

@@ -8,6 +8,10 @@
 * @license https://opensource.org/licenses/MIT MIT License
 */
 
-$app->register("main", "TestController");
+$app->register("blue", "BlueLineController");
+$app->register("green", "GreenLineController");
+$app->register("orange", "OrangeLineController");
+$app->register("red", "RedLineController");
+$app->register("silver", "SilverLineController");
 
 ?>

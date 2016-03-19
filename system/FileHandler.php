@@ -17,45 +17,68 @@ class FileHandler
 
 	public function __construct(string $directory)
 	{
-		$this->changeDirectory($directory);
+		$this->cd($directory);
 	}
 
-	public function changeDirectory(string $directory)
+	public function cd(string $directory)
 	{
 		if (is_dir($directory))
 		{
-			$this->directory = $directory;
+			$this->directory = $directory . ((substr($directory, strlen($directory) - 1) !== "/") ? "/" : "");
 		}
 	}
 
-	public function closeFile()
+	public function close($file = null)
 	{
-		fclose($this->pointer);
-		$this->pointer = null;
-		$this->file = null;
+		if ($file !== null)
+		{
+			fclose($file);
+		}
+		else
+		{
+			fclose($this->pointer);
+			$this->pointer = null;
+			$this->file = null;
+		}
 	}
 
-	public function createFile(string $name, string $contents = "")
+	public function create(string $name, string $contents = "")
 	{
 		$this->file = $this->directory . $name;
-		$this->pointer = fopen($this->file, "x+");
+		$this->pointer = fopen($this->file, "wa+");
+		chmod($this->file, 0777);
 
 		if ($contents !== "")
 		{
-			$this->writeFile($contents);
+			$this->write($contents);
 		}
 	}
 
 	public function delete(string $name)
 	{
-		if (is_dir($this->directory . $name))
+		if (is_dir($name))
 		{
-			rmdir($this->directory . $name);
+			$files = array_diff(scandir($name), array(".", ".."));
+
+			foreach ($files as $file)
+			{
+				$this->delete($name . "/" . $file);
+			}
+
+			rmdir($name);
 		}
 		else
 		{
-			unlink($this->directory . $name);
+			if (is_file($name))
+			{
+				unlink($name);
+			}
 		}
+	}
+
+	public function exists(string $name): bool
+	{
+		return file_exists($this->directory . $name);
 	}
 
 	public function getDirectory(): string
@@ -63,12 +86,23 @@ class FileHandler
 		return $this->directory;
 	}
 
-	public function getFileContents(): string
+	public function getFileContents(string $file = ""): string
 	{
-		return fread($this->pointer, $this->getFileSize());
+		if ($file)
+		{
+			$pointer = $this->open($file);
+			$contents = fread($pointer, filesize($this->directory . $file));
+			$this->close($pointer);
+		}
+		else
+		{
+			$contents = fread($this->pointer, $this->getFileSize());
+		}
+
+		return $contents;
 	}
 
-	public function getFileSize(): double
+	public function getFileSize(): int
 	{
 		return filesize($this->file);
 	}
@@ -76,25 +110,28 @@ class FileHandler
 	public function mkdir(string $name, $change = true)
 	{
 		mkdir($this->directory . $name, 0777, true);
+		chmod($this->directory . $name, 0777);
 
 		if ($change)
 		{
-			$this->changeDirectory($this->directory . $name . "/");
+			$this->cd($this->directory . $name);
 		}
 	}
 
-	public function openFile(string $name, string $contents = "")
+	public function open(string $name, bool $store = false)
 	{
-		$this->file = $this->directory . $name;
-		$this->pointer = fopen($this->file, "r+");
-
-		if ($contents !== "")
+		if ($store)
 		{
-			$this->writeFile($contents);
+			$this->file = $this->directory . $name;
+			$this->pointer = fopen($this->file, "r+");
+		}
+		else
+		{
+			return fopen($this->directory . $name, "r+");
 		}
 	}
 
-	public function writeFile(string $contents)
+	public function write(string $contents)
 	{
 		fwrite($this->pointer, $contents);
 	}

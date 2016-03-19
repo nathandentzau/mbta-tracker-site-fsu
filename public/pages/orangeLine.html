@@ -1,0 +1,92 @@
+<style type="text/css">
+<!--
+    nav {
+      background-color: #FD8A03; /*original: #ee6e73*/
+    }
+
+        .lineHeader {
+            background-image: url("images/orangeLine.jpg");
+            background-position: 0% 50%;
+        }
+                    
+        .lineHeader h2 {
+            background: rgba(253, 138, 3,0.7);
+        }
+
+    .tabs {
+        width: 100%; 
+    }
+
+    .tabs .tab a {
+      color: #FD8A03;
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .tabs .tab a:hover {
+      color: #fff;
+      background-color: #FD8A03;
+    }
+
+    .tabs .indicator {
+      position: absolute;
+      bottom: 0;
+      height: 4px;
+      width: 49.99%;
+      background-color: #FD8A03;
+      will-change: left, right;
+    }
+
+    .schedule .station {
+        background-color: #FD8A03;
+    }
+-->
+</style>
+
+<div class="lineHeader">
+    <h2>Orange Line</h2>
+</div>
+
+<div class="row directions">
+    <div class="container">
+        <div class="col s6" style="text-align: left !important;">
+            <i class="fa fa-arrow-up"></i>&nbsp;&nbsp;Outbound
+        </div>
+
+        <div class="col s6" style="text-align: right !important;">
+            Inbound&nbsp;&nbsp;<i class="fa fa-arrow-down"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row schedule" ng-repeat="station in schedule">
+    <div class="container">
+        <div class="col l4 m3 s3 time" style="text-align: left;">
+            <div ng-if="station.outbound == -1">
+                <i class="fa fa-subway fa-2x"></i>
+            </div>
+            <div ng-if="station.outbound == 0">
+                &dash;
+            </div>
+            <div ng-if="station.outbound > 0">
+                {{ station.outbound * 1000 | date:"h:mma" }}
+            </div>
+        </div>
+
+        <div class="col l4 m6 s6 station">
+            {{ station.name }}
+        </div>
+
+        <div class="col l4 m3 s3 time" style="text-align: right;">
+            <div ng-if="station.inbound == -1">
+                <i class="fa fa-subway fa-2x"></i>
+            </div>
+            <div ng-if="station.inbound == 0">
+                &dash;
+            </div>
+            <div ng-if="station.inbound > 0">
+                {{ station.inbound * 1000 | date:"h:mma" }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -49,7 +49,7 @@ abstract class Controller
     * @param string $request This string is the key passed through the global arrays of _GET and _POST.
     * @return string Yeah, we're just returning the value of the associative array key that's called.
     */
-    private function request(string $request): string
+    protected function request(string $request): string
     {
         return @array_merge($_POST, $_GET)[$request];
     }
