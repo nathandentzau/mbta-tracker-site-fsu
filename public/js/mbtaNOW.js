@@ -8,6 +8,10 @@ mbtaNOW.config(function($routeProvider, $locationProvider) {
         templateUrl: "pages/blueLine.html",
         controller: "BlueLineController"
     })
+    .when("/CommuterRail", {
+        templateUrl: "pages/commuterRail.html",
+        controller: ""
+    })
     .when("/GreenLine", {
         templateUrl: "pages/greenLine.html",
         controller: "GreenLineController"
@@ -28,10 +32,10 @@ mbtaNOW.config(function($routeProvider, $locationProvider) {
         redirectTo: "/Dashboard"
     });
 
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-    });
+    // $locationProvider.html5Mode({
+    //     enabled: true,
+    //     requireBase: false
+    // });
 });
 
 var promise = undefined;

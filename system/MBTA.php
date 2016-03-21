@@ -29,9 +29,11 @@ class MBTA
 
     public function cacheAll()
     {
+
         $this->cacheRoutes();
         $this->cacheStops();
         $this->cacheHubs();
+        
     }
 
     public function cacheHubs()
@@ -140,8 +142,6 @@ class MBTA
 
         foreach ($this->getAllRoutes() as $type => $routes)
         {
-            $type = str_replace(" ", "", $type);
-
             $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
 
             if (!$this->file->exists($type))

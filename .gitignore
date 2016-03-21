@@ -1,2 +1,3 @@
 cache/*
 logs/*
+application/cache.php
