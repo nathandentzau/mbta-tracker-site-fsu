@@ -10,7 +10,7 @@ mbtaNOW.config(function($routeProvider, $locationProvider) {
     })
     .when("/CommuterRail", {
         templateUrl: "pages/commuterRail.html",
-        controller: ""
+        controller: "CommuterRailController"
     })
     .when("/GreenLine", {
         templateUrl: "pages/greenLine.html",
@@ -45,6 +45,27 @@ mbtaNOW.controller("BlueLineController", function($scope, $http, $timeout) {
 
     var request = function() {
         $http.get("request.php?route=blue").success(function(response) {
+            $scope.schedule = response;
+
+            promise = $timeout(request, 15000);
+        });
+    };
+    
+    request();
+
+    $scope.$on('$destroy', function(){
+        if (angular.isDefined(promise)) {
+            $timeout.cancel(promise);
+            promise = undefined;
+        }
+    });
+});
+
+mbtaNOW.controller("CommuterRailController", function($scope, $http, $timeout) {
+    $scope.schedule = [];
+
+    var request = function() {
+        $http.get("request.php?route=commuter-rail").success(function(response) {
             $scope.schedule = response;
 
             promise = $timeout(request, 15000);

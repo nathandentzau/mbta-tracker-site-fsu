@@ -22,7 +22,7 @@ class CommuterRailController extends Controller
     public function main()
     {
 
-        print_r($this->commuterRail->getPredictions("CR-Worcester"));
+        return $this->b();
         // $line = strtolower($this->request("line"));
 
         // return method_exists($this, $line) ? $this->$line() : [];
@@ -30,7 +30,7 @@ class CommuterRailController extends Controller
 
     public function b(): array
     {
-        return $this->parseResults($this->greenLine->getBLineStops(), $this->greenLine->getBLinePredictions());
+        return $this->parseResults($this->commuterRail->getStops("CR-Worcester"), $this->commuterRail->getPredictions("CR-Worcester"));
     }
 
     private function parseResults($stops, $predictions): array 
