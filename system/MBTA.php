@@ -140,7 +140,7 @@ class MBTA
 
         foreach ($this->getAllRoutes() as $type => $routes)
         {
-            if ($type === "Boat" || $type === "Heavy Rail") continue;
+            $type = str_replace(" ", "", $type);
 
             $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
 
