@@ -9,6 +9,7 @@
 */
 
 $app->register("blue", "BlueLineController");
+$app->register("commuter-rail", "CommuterRailController");
 $app->register("green", "GreenLineController");
 $app->register("orange", "OrangeLineController");
 $app->register("red", "RedLineController");

@@ -34,7 +34,7 @@ require SYSTEM_DIR . "MBTA.php";
 
 $mbta = new system\MBTA;
 // $mbta->cacheAll(); this sends all the request we need to store
-// $mbta->cachePredictions();
+ $mbta->cachePredictions();
 ?>
 
 

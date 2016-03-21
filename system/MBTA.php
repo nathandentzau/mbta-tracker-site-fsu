@@ -142,8 +142,6 @@ class MBTA
 
         foreach ($this->getAllRoutes() as $type => $routes)
         {
-            if ($type === "Boat" || $type === "Heavy Rail") continue;
-
             $this->file->cd(CACHE_DIR . self::PREDICTIONS_DIR_NAME);
 
             if (!$this->file->exists($type))
