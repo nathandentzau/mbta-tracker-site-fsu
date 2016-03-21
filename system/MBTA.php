@@ -29,9 +29,11 @@ class MBTA
 
     public function cacheAll()
     {
+
         $this->cacheRoutes();
         $this->cacheStops();
         $this->cacheHubs();
+        
     }
 
     public function cacheHubs()

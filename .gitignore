@@ -1,2 +1,4 @@
 cache/*
 logs/*
+application/cache.php
+system/MBTA.php

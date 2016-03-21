@@ -19,7 +19,7 @@ if ($hour >= 3 && $hour <= 5)
 	exit;
 }
 
-define("ROOT_DIR", "/home/nathan/www/mbta/");
+define("ROOT_DIR", "/Applications/MAMP/htdocs/realtime-mbta-tracker/");
 define("APPLICATION_DIR", ROOT_DIR . "applications/");
 define("CACHE_DIR", ROOT_DIR . "cache/");
 define("PUBLIC_DIR", ROOT_DIR . "public/");
@@ -33,10 +33,8 @@ require SYSTEM_DIR . "FileHandler.php";
 require SYSTEM_DIR . "MBTA.php";
 
 $mbta = new system\MBTA;
-echo "Shiz\n";
-var_dump($mbta->getRoutes());
-// $mbta->cacheRoutes();
-$mbta->cachePredictions();
+// $mbta->cacheAll(); this sends all the request we need to store
+// $mbta->cachePredictions();
 ?>
 
 
