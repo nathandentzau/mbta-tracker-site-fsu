@@ -13,6 +13,7 @@ nav {
     width: 100%;
     height: 56px;
     line-height: 56px;
+    background-color: rgb(25, 25, 25);
 }
 
 .brand-logo {
@@ -34,6 +35,89 @@ nav {
     text-align: center;
 }
 
+.col.transitCard {
+    padding: 0px !important;
+}
+
+.transitCard {
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.transitCard h2 {
+    font-weight: 200;
+    color: white;
+    padding: 85px 0px 0px 10px !important;
+    margin: 0px !important;
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .transitCard {
+        height: 100px;
+    }
+
+    .transitCard h2 {
+        padding: 35px 0px 0px 10px !important;
+    }
+
+}
+
+.transitCard.blueLine {
+    background-image: url("../images/blueLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.blueLine h2 {
+    background-color: rgba(47, 93, 166,0.7);
+}
+
+.transitCard.greenLine {
+    background-image: url("../images/greenLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.greenLine h2 {
+    background-color: rgba(0, 129, 80, 0.7);
+}
+
+.transitCard.orangeLine {
+    background-image: url("../images/orangeLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.orangeLine h2 {
+    background-color: rgba(253, 138, 3, 0.7);
+}
+
+.transitCard.redLine {
+    background-image: url("../images/redLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.redLine h2 {
+    background-color: rgba(250, 45, 39, 0.7);
+}
+
+.transitCard.silverLine {
+    background-image: url("../images/silverLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.silverLine h2 {
+    background-color: rgba(154, 156, 157, 0.7);
+}
+
+.transitCard.commuterRail {
+    background-image: url("../images/commLine.jpg");
+    background-position: 0% 30%;
+}
+
+.transitCard.commuterRail h2 {
+    background-color: rgba(157, 21, 130, 0.7);
+}
+
 div[ng-view] {
     margin-top: 30px;
 }
@@ -53,7 +137,7 @@ div[ng-view] {
 }
 
 .directions {
-    background-color: black;
+    background-color: rgb(25, 25, 25);
     color: white;
     text-align: center;
     padding: 10px 0px;
@@ -79,4 +163,12 @@ div[ng-view] {
 .schedule .time {
     padding: 5px 0px;
     font-size: 14px;
+}
+
+.page-footer {
+    background-color: rgb(35, 35, 35) !important;
+}
+
+.footer-copyright {
+    background-color: rgb(25, 25, 25) !important;
 }
