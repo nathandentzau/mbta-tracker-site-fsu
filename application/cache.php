@@ -19,7 +19,7 @@ if ($hour >= 3 && $hour <= 5)
 	exit;
 }
 
-define("ROOT_DIR", "/Applications/MAMP/htdocs/realtime-mbta-tracker/");
+define("ROOT_DIR", "/home/nathan/www/mbta/");
 define("APPLICATION_DIR", ROOT_DIR . "applications/");
 define("CACHE_DIR", ROOT_DIR . "cache/");
 define("PUBLIC_DIR", ROOT_DIR . "public/");

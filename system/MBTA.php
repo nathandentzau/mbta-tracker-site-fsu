@@ -29,11 +29,9 @@ class MBTA
 
     public function cacheAll()
     {
-
         $this->cacheRoutes();
         $this->cacheStops();
         $this->cacheHubs();
-        
     }
 
     public function cacheHubs()
@@ -94,14 +92,11 @@ class MBTA
             }
         }
 
-        $this->file->cd(CACHE_DIR);
+        print_r($routes);
 
-        if ($this->file->exists(self::ROUTES_FILE_NAME))
-        {
-            $this->file->delete(CACHE_DIR . self::ROUTES_FILE_NAME);
-        }
-        
+        $this->file->cd(CACHE_DIR);        
         $this->file->create(self::ROUTES_FILE_NAME, serialize($routes));
+        $this->file->close();
     }
 
     public function cacheSchedules()

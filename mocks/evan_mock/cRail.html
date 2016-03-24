@@ -112,13 +112,12 @@ nav {
 <!-- LINE SELECTOR -->
 
 <div class="input-field col s12">
-    <select class="browser-default">
+    <select>
       <option value="" disabled selected>Select a Line</option>
       <option value="1">Framingham/Worcester</option>
       <option value="2">Fitchburg</option>
       <option value="3">Fairmount</option>
     </select>
-    <label> </label>
   </div>
 
 <!-- LINE 1 -->
@@ -265,6 +264,12 @@ nav {
       <li><a href="#" class="btn-floating green"><i class="fa fa-money"></i></a></li>
     </ul>
   </div>-->
+
+  <script type="text/javascript">
+   $(document).ready(function() {
+    $('select').material_select();
+  });
+  </script>
       
       
     </body>

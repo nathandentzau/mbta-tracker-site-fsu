@@ -32,10 +32,10 @@ mbtaNOW.config(function($routeProvider, $locationProvider) {
         redirectTo: "/Dashboard"
     });
 
-    // $locationProvider.html5Mode({
-    //     enabled: true,
-    //     requireBase: false
-    // });
+    $locationProvider.html5Mode({
+         enabled: true,
+         requireBase: false
+    });
 });
 
 var promise = undefined;
@@ -80,6 +80,8 @@ mbtaNOW.controller("CommuterRailController", function($scope, $http, $timeout) {
             promise = undefined;
         }
     });
+
+    $("select").material_select();
 });
 
 mbtaNOW.controller("GreenLineController", function($scope, $http, $timeout) {

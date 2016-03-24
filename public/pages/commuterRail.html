@@ -40,11 +40,47 @@
     .schedule .station {
         background-color: #9D1582;
     }
+
+    .input-field {
+        margin-top: 0px;
+    }
+
+    .select-dropdown {
+        margin-bottom: 0px !important;
+        padding-left: 10px !important;
+    }
+
+    .caret {
+        right: 10px !important;
+    }
 -->
 </style>
 
 <div class="lineHeader">
     <h2>Commuter Rail</h2>
+</div>
+
+<div class="input-field col s12">
+    <select>
+        <option value="" disabled selected>Select a Line</option>
+        <optgroup label="North Side">
+            <option value="fitchburg">Fitchburg Line</option>
+            <option value="haverhill">Haverhill Line</option>
+            <option value="lowell">Lowell Line</option>
+            <option value="newburyport">Newburyport/Rockport Line</option>
+        </optgroup>
+
+        <optgroup label="South Side">
+            <option value="fairmount">Fairmount Line</option>
+            <option value="framingham">Framingham/Worcester Line</option>
+            <option value="franklin">Frankin Line</option>
+            <option value="greenbush">Greenbush Line</option>
+            <option value="kingston">Kingston/Plymouth Line</option>
+            <option value="middleboro">Middleborough/Lakeville Line</option>
+            <option value="needham">Needham Line</option>
+            <option value="providence">Providence/Stoughton Line</option>
+        </optgroup>
+    </select>
 </div>
 
 <div class="row directions">
