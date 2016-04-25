@@ -6,5 +6,10 @@
             "email": "nathan.dentzau@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/filesystem": "^3.0",
+        "symfony/serializer": "^3.0",
+        "google/gtfs-realtime-bindings": "^0.0.2",
+        "oscarotero/env": "^1.0"
+    }
 }
