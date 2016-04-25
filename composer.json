@@ -1,0 +1,10 @@
+{
+    "name": "nathandentzau/mbta-realtime-tracker",
+    "authors": [
+        {
+            "name": "Nathan Dentzau",
+            "email": "nathan.dentzau@gmail.com"
+        }
+    ],
+    "require": {}
+}
