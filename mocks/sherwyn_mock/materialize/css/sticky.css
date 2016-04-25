@@ -1,0 +1,24 @@
+/* This is for the sticky footer*/
+  .stupid-padding{
+    padding-bottom: 0 !important;
+  }
+  .border-lines{
+    border-style: solid;
+    border-right: 1px !important;
+    border-color: black !important;
+  }
+  .center-button-text {
+  	margin-top: inherit;
+  	margin-bottom: inherit;
+  	}
+  .button-text-size{
+  	font-size: 1.2rem !important;
+  }
+  .button-icon{
+  	margin-right: 10px;
+  	
+  }
+  .our-logo{
+    height: 50px;
+  }
+ /* This is end for the sticky footer*/

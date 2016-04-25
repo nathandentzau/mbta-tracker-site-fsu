@@ -1,0 +1,174 @@
+/**
+* mbtaNOW - Realtime MBTA Data
+*
+* @author Nathan Dentzau (Project Manager) <nathan.dentzau@gmail.com>
+* @author Sherwyn Cooper (Developer)
+* @author Evan Jensen (Designer)
+* @copyright 2016 Framingham State University
+* @license https://opensource.org/licenses/MIT MIT License
+*/
+
+nav {
+    color: #fff;
+    width: 100%;
+    height: 56px;
+    line-height: 56px;
+    background-color: rgb(25, 25, 25);
+}
+
+.brand-logo {
+    margin-top: 3px;
+    height: 53px;
+}
+
+.brand-logo a {
+    height: 53px;
+}
+
+.navbar-fixed, nav {
+    height: 56px !important;
+}
+
+.card-panel {
+    height: 180px;
+    padding: 40px;
+    text-align: center;
+}
+
+.col.transitCard {
+    padding: 0px !important;
+}
+
+.transitCard {
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.transitCard h2 {
+    font-weight: 200;
+    color: white;
+    padding: 85px 0px 0px 10px !important;
+    margin: 0px !important;
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .transitCard {
+        height: 100px;
+    }
+
+    .transitCard h2 {
+        padding: 35px 0px 0px 10px !important;
+    }
+
+}
+
+.transitCard.blueLine {
+    background-image: url("../images/blueLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.blueLine h2 {
+    background-color: rgba(47, 93, 166,0.7);
+}
+
+.transitCard.greenLine {
+    background-image: url("../images/greenLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.greenLine h2 {
+    background-color: rgba(0, 129, 80, 0.7);
+}
+
+.transitCard.orangeLine {
+    background-image: url("../images/orangeLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.orangeLine h2 {
+    background-color: rgba(253, 138, 3, 0.7);
+}
+
+.transitCard.redLine {
+    background-image: url("../images/redLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.redLine h2 {
+    background-color: rgba(250, 45, 39, 0.7);
+}
+
+.transitCard.silverLine {
+    background-image: url("../images/silverLine.jpg");
+    background-position: 0% 50%;
+}
+
+.transitCard.silverLine h2 {
+    background-color: rgba(154, 156, 157, 0.7);
+}
+
+.transitCard.commuterRail {
+    background-image: url("../images/commLine.jpg");
+    background-position: 0% 30%;
+}
+
+.transitCard.commuterRail h2 {
+    background-color: rgba(157, 21, 130, 0.7);
+}
+
+div[ng-view] {
+    margin-top: 30px;
+}
+
+.lineHeader {
+    margin-top:-30px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+                    
+.lineHeader h2 {
+    padding: 35px;
+    background:rgba(0, 129, 80,0.7);
+    font-weight:200;
+    color:white;
+    margin: 0px !important;
+}
+
+.directions {
+    background-color: rgb(25, 25, 25);
+    color: white;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.schedule {
+    font-size: 18px;
+    text-align: center;
+}
+
+.schedule .station {
+    background-color: green;
+    color: white;
+    font-weight: 500;
+    padding: 5px 0px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.schedule .time {
+    padding: 5px 0px;
+    font-size: 14px;
+}
+
+.page-footer {
+    background-color: rgb(35, 35, 35) !important;
+}
+
+.footer-copyright {
+    background-color: rgb(25, 25, 25) !important;
+}
